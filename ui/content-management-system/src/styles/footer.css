@@ -1,0 +1,13 @@
+.footer-content {
+  overflow-y: auto;
+  width: 100%;
+  background-color: lightblue;
+  float: left;
+  text-align: left;
+}
+
+.social-icons {
+  margin-bottom: 20;
+  text-decoration: "none";
+  display: "inline";
+}

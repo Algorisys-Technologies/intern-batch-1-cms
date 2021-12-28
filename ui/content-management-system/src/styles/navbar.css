@@ -1,0 +1,24 @@
+.navbar {
+  /* float: left; */
+  margin: auto;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+  display: inline;
+}
+.navbar-ul {
+  margin-left: 10px;
+  display: inline-block;
+  background-color: darksalmon;
+}
+.navbar-li {
+  display: inline;
+  font-size: 20px;
+  text-decoration: none !important;
+  margin-left: 70px;
+}
+
+.navbarLink {
+  margin-left: 40px;
+}
