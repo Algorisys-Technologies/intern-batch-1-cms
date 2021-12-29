@@ -1,8 +1,28 @@
 const express = require("express");
 const app = express();
-const { Sequelize } = require("sequelize");
+const { Sequelize, where } = require("sequelize");
+const jwt = require("express-jwt");
+const jsonwbt = require("jsonwebtoken");
 app.use(express.json());
-
+// app.use(
+//   jwt({
+//     secret: "hello world !",
+//     algorithms: ["HS256"],
+//     // credentialsRequired: false,
+//     // getToken: function fromHeaderOrQuerystring(req) {
+//     //   if (
+//     //     req.headers.authorization &&
+//     //     req.headers.authorization.split(" ")[0] === "Bearer"
+//     //   ) {
+//     //     return req.headers.authorization.split(" ")[1];
+//     //   } else if (req.query && req.query.token) {
+//     //     return req.query.token;
+//     //   }
+//     //   return null;
+//     // },
+//   })
+// );
+const bcrypt = require("bcrypt");
 const { Client } = require("pg");
 
 const client = new Client({
@@ -84,7 +104,10 @@ app.get("/", (req, res) => {
   res.send("Server Started");
 });
 
-app.post("/create", (req, res) => {
+app.post("/register", async (req, res) => {
+  const salt = await bcrypt.genSalt(10);
+  req.body.password = await bcrypt.hash(req.body.password, salt);
+
   User.create(req.body)
     .then((data) => {
       res.send(data);
@@ -96,6 +119,33 @@ app.post("/create", (req, res) => {
     });
 });
 
+app.get("/login", async (req, res) => {
+  // const user = await User.findOne({
+  //   where: { user_email: req.body.user_email },
+  // });]
+  const user = await User.findOne({
+    where: { user_email: req.body.user_email },
+  });
+  if (!user) {
+    res.status(404).send("User not found");
+  }
+  var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+  // Check password validity
+  if (!passwordIsValid) {
+    return res.status(401).send({
+      accessToken: null,
+      message: "Invalid Password!Try again",
+    });
+  }
+  const token = jsonwbt.sign(
+    {
+      userId: req.body.user_id,
+    },
+    "secret",
+    { expiresIn: "1d" }
+  );
+  res.status(200).send(token);
+});
 // app.post("/create", async function (req, res, next) {
 //   try {
 //     res.json(await User.create(req.body));
