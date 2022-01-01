@@ -22,25 +22,29 @@ app.use(express.json());
 //     // },
 //   })
 // );
+
 const bcrypt = require("bcrypt");
 const { Client } = require("pg");
 
-const client = new Client({
-  host: "localhost",
-  user: "postgres",
-  port: 5432,
-  password: "mzaki2599",
-  database: "cms_database",
-});
+const cors = require("cors");
+app.use(cors("*"));
 
-client
-  .connect()
-  .then((req, res) => {
-    console.log("Connection succesfull");
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+// const client = new Client({
+//   host: "localhost",
+//   user: "postgres",
+//   port: 5432,
+//   password: "mzaki2599",
+//   database: "cms_database",
+// });
+
+// client
+//   .connect()
+//   .then((req, res) => {
+//     console.log("Connection succesfull");
+//   })
+//   .catch((err) => {
+//     console.log(err.message);
+//   });
 
 // client.query("Select * from cms_user", (err, res) => {
 //   if (!err) {
@@ -50,6 +54,7 @@ client
 //   }
 //   client.end();
 // });
+// DOne for today  ! ?
 
 const sequelize = new Sequelize("cms_database", "postgres", "mzaki2599", {
   host: "localhost",
@@ -105,8 +110,8 @@ app.get("/", (req, res) => {
 });
 
 app.post("/register", async (req, res) => {
-  const salt = await bcrypt.genSalt(10);
   req.body.password = await bcrypt.hash(req.body.password, salt);
+  const salt = await bcrypt.genSalt(10);
 
   User.create(req.body)
     .then((data) => {
@@ -119,33 +124,32 @@ app.post("/register", async (req, res) => {
     });
 });
 
-app.get("/login", async (req, res) => {
-  // const user = await User.findOne({
-  //   where: { user_email: req.body.user_email },
-  // });]
+app.post("/login", async (req, res) => {
+  // console.log("In Get Login");
+  //console.log(req.body);
   const user = await User.findOne({
     where: { user_email: req.body.user_email },
   });
   if (!user) {
-    res.status(404).send("User not found");
+    console.log("User not found");
+    return res.status(404).send("User not found");
   }
-  var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+  var passwordIsValid = bcrypt.compareSync(
+    req.body.user_password,
+    user.password
+  );
   // Check password validity
   if (!passwordIsValid) {
+    console.log("Invalid Password! Try again");
     return res.status(401).send({
       accessToken: null,
       message: "Invalid Password!Try again",
     });
   }
-  const token = jsonwbt.sign(
-    {
-      userId: req.body.user_id,
-    },
-    "secret",
-    { expiresIn: "1d" }
-  );
-  res.status(200).send(token);
+  console.log("Sign-in successfully!!");
+  res.status(200).send("Sign-in successfully!!");
 });
+
 // app.post("/create", async function (req, res, next) {
 //   try {
 //     res.json(await User.create(req.body));
