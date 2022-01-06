@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button } from "react-bootstrap";
 import "../styles/Login.css";
-const axios = require("axios");
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -28,15 +28,16 @@ export default function Login() {
     }
     if (email && password) {
       axios
-        .post("http://192.168.43.182:3001/login", {
+        .post("http://localhost:3001/login", {
           user_email: email,
           user_password: password,
         })
         .then(function (response) {
-          console.log(response);
+          alert(response.data);
         })
         .catch(function (error) {
           console.log(error);
+          alert(error.message);
         });
     }
     // console.log("test");

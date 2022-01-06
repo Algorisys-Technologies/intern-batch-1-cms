@@ -50,10 +50,10 @@ export default function SignUp() {
       })
       .then(
         (response) => {
-          // console.log(response);
+          console.log(response);
+          alert(response.data);
         },
         (error) => {
-          // alert("username already taken. Try with another one !");
           alert(error.message);
           console.log(error);
         }
