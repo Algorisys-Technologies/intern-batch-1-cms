@@ -1083,4 +1083,18 @@ app.get("/activateuser/:userId", (req, res) => {
   res.status(200).send("Account verified"); // + user.user_name);
 });
 
+const { Sequelize } = require("sequelize");
+const cors = require("cors");
+
+const jsonwbt = require("jsonwebtoken");
+
+//Routes
+const postRoutes = require("./routes/posts");
+const userRoutes = require("./routes/user");
+app.use(express.json());
+app.use(cors("*"));
+
+app.use(postRoutes);
+app.use(userRoutes);
+
 app.listen(3001);

@@ -1,0 +1,58 @@
+const { Sequelize } = require("sequelize");
+
+const sequelize = new Sequelize("cms_database", "postgres", "mzaki2599", {
+  host: "localhost",
+  dialect: "postgres",
+});
+
+const User = sequelize.define(
+  "user",
+  {
+    user_id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      require: true,
+    },
+    user_name: {
+      type: Sequelize.STRING,
+      field: "user_name",
+      require: true,
+    },
+    user_email: {
+      type: Sequelize.STRING,
+      field: "user_email",
+      require: true,
+    },
+    user_password: {
+      type: Sequelize.STRING,
+      field: "user_password",
+      require: true,
+    },
+    user_role: {
+      type: Sequelize.ENUM,
+      values: ["Admin", "User"],
+      require: true,
+    },
+    user_image: {
+      type: Sequelize.BLOB,
+      require: false,
+    },
+    created_at: Sequelize.TIME,
+    updated_at: Sequelize.TIME,
+    created_by: Sequelize.STRING,
+    updated_by: Sequelize.STRING,
+    user_email_verified: {
+      type: Sequelize.BOOLEAN,
+      field: "user_email_verified",
+      defaultValue: false,
+      require: true,
+    },
+  },
+  {
+    freezeTableName: true,
+    timestamps: false,
+  }
+);
+
+module.exports = User;
