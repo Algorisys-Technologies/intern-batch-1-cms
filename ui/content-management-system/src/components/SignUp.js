@@ -40,7 +40,7 @@ export default function SignUp() {
       .post("http://localhost:3001/register", {
         user_email: formData.user_email,
         user_name: formData.user_name,
-        password: formData.password,
+        user_password: formData.password,
         user_role: "User",
         user_image: null,
         created_at: "12:10:00+14:59",

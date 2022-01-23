@@ -4,11 +4,13 @@ import SignUp from "./components/SignUp";
 
 import EmailVerification from "./components/emailVerification";
 import TextEditor from "./components/TextEditor";
+
 function App() {
   return (
     <div className="App">
-      {/* <Login /> */}
-      <TextEditor />
+      <Login />
+      {/* <TextEditor /> */}
+      {/* <SignUp /> */}
     </div>
   );
 }

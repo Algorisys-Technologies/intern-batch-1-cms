@@ -9,10 +9,11 @@ const User = sequelize.define(
   "user",
   {
     user_id: {
-      type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       require: true,
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
     },
     user_name: {
       type: Sequelize.STRING,
@@ -49,6 +50,7 @@ const User = sequelize.define(
       require: true,
     },
   },
+
   {
     freezeTableName: true,
     timestamps: false,
