@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 import Avatar from "react-avatar";
 //import SearchField from "react-search-field";
@@ -28,13 +28,19 @@ const navigationBar = () => {
             navbarScroll
           >
             <Nav.Link className="navbarLink" href="#action1">
-              Dashboard
+              <Link to="/dashboard"> Dashboard</Link>
             </Nav.Link>
             <Nav.Link className="navbarLink" href="#action1">
-              Home
+              <Link to="/">Home</Link>
             </Nav.Link>
             <Nav.Link className="navbarLink" href="#action2">
-              Design
+              <Link to="/createpost"> Design</Link>
+            </Nav.Link>
+            <Nav.Link className="navbarLink" href="#action2">
+              <Link to="/login">Login</Link>
+            </Nav.Link>
+            <Nav.Link className="navbarLink" href="#action2">
+              <Link to="/signup">SignUp </Link>
             </Nav.Link>
             <NavDropdown
               title="Blogs"
@@ -46,12 +52,12 @@ const navigationBar = () => {
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action5">Drafts</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link className="navbarLink" href="#action6">
+            {/* <Nav.Link className="navbarLink" href="#action6">
               Notifications
-            </Nav.Link>
-            <Nav.Link className="navbarLink" href="#action7">
+            </Nav.Link> */}
+            {/* <Nav.Link className="navbarLink" href="#action7">
               Settings
-            </Nav.Link>
+            </Nav.Link> */}
           </Nav>
           <Form className="d-flex navbarLink">
             <FormControl
@@ -63,13 +69,14 @@ const navigationBar = () => {
             <Button variant="outline-success">Search</Button>
           </Form>
         </Navbar.Collapse>
-        <Avatar
+
+        {/* <Avatar
           color={Avatar.getRandomColor("sitebase", ["red", "green", "blue"])}
           name="Anonymous"
           round={true}
           size={40}
         />
-        <p style={{ marginTop: "15px", marginLeft: "5px" }}> Anonomous</p>
+        <p style={{ marginTop: "15px", marginLeft: "5px" }}> Anonomous</p> */}
       </Container>
     </Navbar>
   );

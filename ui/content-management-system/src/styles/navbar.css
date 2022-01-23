@@ -21,4 +21,10 @@ a {
 
 .navbarLink {
   margin-left: 40px;
+  cursor: pointer;
+}
+
+.navbarLink a {
+  color: black;
+  text-decoration: none;
 }

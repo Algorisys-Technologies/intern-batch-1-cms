@@ -1,9 +1,6 @@
 const express = require("express");
 const app = express();
-const { Sequelize, where } = require("sequelize");
-const jsonwbt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const { Client } = require("pg");
+
 const cors = require("cors"); // handling cross origin request site block
 
 const postRoutes = require("./routes/posts");
