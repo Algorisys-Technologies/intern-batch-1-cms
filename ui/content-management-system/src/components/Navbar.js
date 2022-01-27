@@ -32,15 +32,15 @@ const navigationBar = () => {
             </Nav.Link>
             <Nav.Link className="navbarLink" href="#action1">
               <Link to="/">Home</Link>
+            </Nav.Link>{" "}
+            <Nav.Link className="navbarLink" href="#action2">
+              <Link to="/viewpost">Posts</Link>
             </Nav.Link>
             <Nav.Link className="navbarLink" href="#action2">
               <Link to="/createpost"> Design</Link>
             </Nav.Link>
             <Nav.Link className="navbarLink" href="#action2">
               <Link to="/login">Login</Link>
-            </Nav.Link>
-            <Nav.Link className="navbarLink" href="#action2">
-              <Link to="/signup">SignUp </Link>
             </Nav.Link>
             <NavDropdown
               title="Blogs"

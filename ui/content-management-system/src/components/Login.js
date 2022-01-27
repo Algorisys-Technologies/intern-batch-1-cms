@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "../styles/Login.css";
 import axios from "axios";
 
@@ -58,7 +59,6 @@ export default function Login() {
             onChange={(e) => handleChange(e.target.value)}
           />
         </Form.Group>
-
         <Form.Group controlId="formBasicPassword">
           <Form.Label className="input-text">Password</Form.Label>
           <Form.Control
@@ -68,12 +68,13 @@ export default function Login() {
             onChange={(e) => handleChange(e.target.value, "p")}
           />
         </Form.Group>
-
         <Button variant="success" type="submit" onClick={authenticationAPI}>
           Sign In
         </Button>
         <p>Forgot Password</p>
-        <p>New User / Sign Up</p>
+        <p>
+          <Link to="/signup">New User / Sign Up</Link>
+        </p>
       </Form>
     </div>
   );

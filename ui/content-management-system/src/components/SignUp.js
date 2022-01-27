@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Row, Col, Button, Text, Image } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "../styles/SignUp.css";
 
 import axios from "axios";
@@ -120,7 +121,9 @@ export default function SignUp() {
         <Button onClick={handleSubmit} variant="success" type="submit">
           Sign Up
         </Button>
-        <p>Already a User ? Sign In</p>
+        <p>
+          <Link to="/login">Already a User ? Sign In</Link>
+        </p>
       </Form>
     </div>
   );

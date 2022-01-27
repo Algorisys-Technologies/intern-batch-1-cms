@@ -4,6 +4,12 @@
   cursor: pointer;
   color: cornflowerblue;
 }
+.layout-set-login p > a {
+  margin-top: 20px;
+  font-size: 15px;
+  cursor: pointer;
+  color: cornflowerblue;
+}
 .input-text {
   margin-top: 12px;
   font-family: sans-serif, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";

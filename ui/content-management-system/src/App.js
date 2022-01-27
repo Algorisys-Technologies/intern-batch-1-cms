@@ -6,6 +6,7 @@ import TextEditor from "./components/TextEditor";
 import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import PostView from "./components/PostView";
 import Dashboard from "./components/Dashboard";
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route exact path="/viewpost">
+            <PostView />
           </Route>
         </Switch>
       </div>
