@@ -13,6 +13,7 @@
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
     "bootstrap": "4.0.0",
+    "flatted": "^3.2.5",
     "html-to-react": "^1.4.7",
     "mdbootstrap": "^4.20.0",
     "react": "^17.0.2",

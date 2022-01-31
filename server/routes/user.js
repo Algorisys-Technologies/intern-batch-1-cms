@@ -9,15 +9,11 @@ const nodemailer = require("nodemailer"); // send email
 const req = require("express/lib/request");
 const res = require("express/lib/response");
 
-const sequelize = new Sequelize("cms_database", "postgres", "mzaki2599", {
-  host: "localhost",
-  dialect: "postgres",
-});
-
 //GET ALL USERS
 router.get("/getUser", async (req, res) => {
   const user = await User.findAll();
   res.send(user);
+  // console.log(process.env);
 });
 
 //REGISTER-USER/SIGNUP
@@ -1018,5 +1014,8 @@ router.get("/activateuser/:userId", (req, res) => {
   );
   res.status(200).send("Account verified"); // + user.user_name);
 });
+
+//DELETE USER
+
 
 module.exports = router;

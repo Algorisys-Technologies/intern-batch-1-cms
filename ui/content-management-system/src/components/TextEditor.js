@@ -3,6 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Dropdown } from "react-bootstrap";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
+import { stringify } from "flatted";
 import axios from "axios";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
   const logy = async () => {
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
+      setContent(editorRef.current.getContent());
     }
     // setaxiosdata({
     //   user_id: "3e7b8cf8-77b5-11ec-90d6-0242ac120003",
@@ -29,22 +31,28 @@ export default function App() {
     // });
     // setContent(editorRef.current.getContent());
     // //console.log(title);
-    // await axios
-    //   .post(
-    //     "http://localhost:3001/post",
-    //     {
-    //       axiosdata,
-    //     }
-    //     //  {
-    //     //   user_id: "3e7b8cf8-77b5-11ec-90d6-0242ac120003",
-    //     //   post_title: title,
-    //     //   categories: category,
-    //     //   status: false,
-    //     //   post_content: content,
-    //     //   created_at: "11:00:00+05:30",
-    //     //   created_by: "Zaki",
-    //     // }
-    //   )
+    console.log({
+      user_id: "871ecb13-a972-48da-ac4d-9dc9a0088365",
+      post_title: title,
+      categories: category,
+      status: false,
+      post_content: editorRef.current.getContent(),
+      created_at: "11:00:00+05:30",
+      created_by: "Zaki",
+    });
+    try {
+      await axios.post("http://localhost:3001/post", {
+        user_id: "871ecb13-a972-48da-ac4d-9dc9a0088365",
+        post_title: title,
+        categories: category,
+        status: false,
+        post_content: editorRef.current.getContent(),
+        created_at: "11:00:00+05:30",
+        created_by: "Zaki",
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
     //   .then(function (response) {
     //     // console.log(response);
     //   })
@@ -62,7 +70,7 @@ export default function App() {
         type="text"
         style={{ width: "58%", marginTop: "20px", border: "1px solid" }}
         placeholder="Title"
-        onChange={(title) => setTitle(title)}
+        onChange={(e) => setTitle(e.target.value)}
       />
       <Dropdown style={{ display: "inline" }}>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
