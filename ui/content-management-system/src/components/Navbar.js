@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/navbar.css";
-import Avatar from "react-avatar";
+//import Avatar from "react-avatar";
 //import SearchField from "react-search-field";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -37,6 +37,9 @@ const navigationBar = () => {
               <Link to="/viewpost">Posts</Link>
             </Nav.Link>
             <Nav.Link className="navbarLink" href="#action2">
+              <Link to="/viewdraft">Drafts</Link>
+            </Nav.Link>
+            <Nav.Link className="navbarLink" href="#action2">
               <Link to="/createpost"> Design</Link>
             </Nav.Link>
             <Nav.Link className="navbarLink" href="#action2">
@@ -50,7 +53,7 @@ const navigationBar = () => {
               <NavDropdown.Item href="#action3">New Blog</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Edit blogs</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">Drafts</NavDropdown.Item>
+              <NavDropdown.Item href="#action5">Blogs</NavDropdown.Item>
             </NavDropdown>
             {/* <Nav.Link className="navbarLink" href="#action6">
               Notifications

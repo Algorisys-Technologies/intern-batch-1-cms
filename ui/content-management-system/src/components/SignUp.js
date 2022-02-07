@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, Row, Col, Button, Text, Image } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../styles/SignUp.css";
 
@@ -25,14 +25,14 @@ export default function SignUp() {
     }
 
     if (
-      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData.user_email)
+      !/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(formData.user_email)
     ) {
       return alert("Email Should be in format 'abc@domain.tld'");
     }
     if (formData.password.length < 8) {
       return alert("Password Should be atleast 8 characters long !");
     }
-    if (formData.password != formData.confirm_password) {
+    if (formData.password !== formData.confirm_password) {
       return alert("Confirm Password Do not match !");
     }
 

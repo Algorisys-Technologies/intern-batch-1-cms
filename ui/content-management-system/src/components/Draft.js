@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import "../styles/PostView.css";
 import { Card, Button, ButtonGroup } from "react-bootstrap";
 import axios from "axios";
+import { Editor, get, getContent } from "@tinymce/tinymce-react";
+import TinyMCE from "react-tinymce";
 
-const AddPost = () => {
-  const [posts, setPosts] = useState([]);
+import "@pathofdev/react-tag-input/build/index.css";
+
+export default function Draft() {
+  const [drafts, setDrafts] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:3001/getPost")
       .then((Post) => {
-        setPosts(Post.data);
+        setDrafts(Post.data);
         console.log(Post.data);
       })
       .catch((err) => {
@@ -29,8 +33,8 @@ const AddPost = () => {
         padding: "1rem",
       }}
     >
-      {posts.map((post) => {
-        if (post.status)
+      {drafts.map((post) => {
+        if (!post.status)
           return (
             <>
               <li style={{ display: "inline" }}>
@@ -49,7 +53,9 @@ const AddPost = () => {
                   />
                   <Card.Body style={{ display: "inline" }}>
                     <Card.Title>{post.post_title}</Card.Title>
-                    <Card.Text>{post.summary}</Card.Text>
+                    <Card.Text>
+                      {TinyMCE.get("myTextarea").setContent(post.post_content)}
+                    </Card.Text>
                     <Button className="readMorebutton" variant="primary">
                       Read more
                     </Button>
@@ -61,36 +67,22 @@ const AddPost = () => {
                         width: "120px",
                         backgroundColor: "transparent",
                         border: "1px solid black",
+                        color: "black",
+                        width: "50%",
                       }}
                     >
-                      <img
-                        src="https://img.icons8.com/material-outlined/30/000000/filled-like.png"
-                        alt="Like"
-                      />
+                      Edit
                     </Button>
                     <Button
                       style={{
                         width: "120px",
                         backgroundColor: "transparent",
                         border: "1px solid black",
+                        color: "black",
+                        width: "50%",
                       }}
                     >
-                      <img
-                        src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/30/000000/external-comment-chat-flatart-icons-outline-flatarticons-2.png"
-                        alt="Comment"
-                      />
-                    </Button>
-                    <Button
-                      style={{
-                        width: "120px",
-                        border: "1px solid black",
-                        backgroundColor: "transparent",
-                      }}
-                    >
-                      <img
-                        src="https://img.icons8.com/external-those-icons-lineal-those-icons/30/000000/external-share-network-sharing-those-icons-lineal-those-icons-1.png"
-                        alt="Share"
-                      />
+                      Publish
                     </Button>
                   </ButtonGroup>
                 </Card>
@@ -102,5 +94,4 @@ const AddPost = () => {
       })}
     </ul>
   );
-};
-export default AddPost;
+}

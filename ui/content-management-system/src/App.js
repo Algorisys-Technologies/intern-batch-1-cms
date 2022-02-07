@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import PostView from "./components/PostView";
 import Dashboard from "./components/Dashboard";
+import Draft from "./components/Draft";
 function App() {
   return (
     <Router>
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route exact path="/createpost">
             <TextEditor />
+          </Route>
+          <Route exact path="/viewdraft">
+            <Draft />
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />

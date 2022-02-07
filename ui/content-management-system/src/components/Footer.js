@@ -55,7 +55,10 @@ const Footer = () => {
                 verticalAlign: "top",
               }}
             >
-              <img src="https://img.icons8.com/pastel-glyph/35/000000/globe.png" />{" "}
+              <img
+                src="https://img.icons8.com/pastel-glyph/35/000000/globe.png"
+                alt="Website"
+              />{" "}
             </li>
           </ul>
           <div style={{ textAlign: "center" }}>
@@ -69,7 +72,10 @@ const Footer = () => {
           </div>
           <hr />
           <p style={{ textAlign: "center", margin: "0px" }}>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADYklEQVRIie2VTUxcVRTHf2dmWnEUExQ1tolJA03cdGEmYvkIeWhibMrAaqCxommLLBpME2OMG6PGTePKhcFGLJJIGsqON4ylY6JAAohhunHhosimgfrRgWQyRaa8d46LvkmGoQzoumd188//nN89977zLjyM/xCylyEej0ej0ehJEYkDdcDTwN/Asogk8/n8RDKZ3PjfkK6urrPAZ8ChCrbbwMdjY2PfALZvSCKROGhmXwNvB9KSmV0FFsxsTUSeFJHjZtYtInUAZnalurr63PDw8GZ5vciDIL7vDwJvAQUReT+bzV6ampryymzJvr6+T7LZ7Hkz+xx4I5fLAbxZ3tGOTjo6Os6KyGWgYGYnXNf9CaCzs/MYcAZ4HvgTcMfHx68DxOPxV0Kh0DXgoJn1ua47uCskkUg8urm5eRM4LCLvuq77ZVCkBxgq71xEBl3X7Qs2d8HMvgBuFwqFo+l0+m7RFypN2tjYaFfVw6q6lMvlLgXJh1T1K1UVVe0pFAqPAzHf92/5vv9OPB5/DWBlZWVAVZdV9blIJHKytO42iKq2qypmNlq8A8/zEqr6mKpeT6VSI+l0+m4ymbyhqhdVdX1ra+sFgEwms6Wqo0H+NkikDHIUwMx+KWqe5x0TEYDFUu/k5OQAMFCWX8yrrwR5KliuFTUze8LMACoOXJB/J1jW7grxfT8bFC7C8DzvnohgZtG9IJ7n1QZd3ynVy+/k9+BMG0o6+TXQXiz1Oo7T7zjOWltb23sl8suqiqrerASZUFV83z/lOE4k0K6o6qaqvt7a2trtOE5VS0tLTFU/VNUaVf0NIBaLHfB9/1SwodSukKqqqglV/cPM6jzPOw8wMzNzS1UvqGpYVUc9z/sHWAw+9W+np6evAUSj0X5VPaKqq/l8fhtkx8Q3Nzf3mtkgcA84MTc39yNAU1PTS8AZM3sWWA2FQu7s7OwPAI2Nja+KyPfcn/hz8/PzQxUhgDQ0NHwnIqcD0Aee5w1kMpmtcmMsFjsQDof7ReQicBAYWVhY6NlR8AEQ6uvrH6mpqbkMnA6kZeCqmf0MZIFaETkOdANHAs/I+vp679LSUmFfkJKd9gKfUvk9WRWRjxYXF4d2M+z5MsZisaiZtQe/ijrgGeAv7r8xqXA4nMpkMnsO6sPYd/wL8TPcEwd0n3YAAAAASUVORK5CYII=" />
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAADYklEQVRIie2VTUxcVRTHf2dmWnEUExQ1tolJA03cdGEmYvkIeWhibMrAaqCxommLLBpME2OMG6PGTePKhcFGLJJIGsqON4ylY6JAAohhunHhosimgfrRgWQyRaa8d46LvkmGoQzoumd188//nN89977zLjyM/xCylyEej0ej0ehJEYkDdcDTwN/Asogk8/n8RDKZ3PjfkK6urrPAZ8ChCrbbwMdjY2PfALZvSCKROGhmXwNvB9KSmV0FFsxsTUSeFJHjZtYtInUAZnalurr63PDw8GZ5vciDIL7vDwJvAQUReT+bzV6ampryymzJvr6+T7LZ7Hkz+xx4I5fLAbxZ3tGOTjo6Os6KyGWgYGYnXNf9CaCzs/MYcAZ4HvgTcMfHx68DxOPxV0Kh0DXgoJn1ua47uCskkUg8urm5eRM4LCLvuq77ZVCkBxgq71xEBl3X7Qs2d8HMvgBuFwqFo+l0+m7RFypN2tjYaFfVw6q6lMvlLgXJh1T1K1UVVe0pFAqPAzHf92/5vv9OPB5/DWBlZWVAVZdV9blIJHKytO42iKq2qypmNlq8A8/zEqr6mKpeT6VSI+l0+m4ymbyhqhdVdX1ra+sFgEwms6Wqo0H+NkikDHIUwMx+KWqe5x0TEYDFUu/k5OQAMFCWX8yrrwR5KliuFTUze8LMACoOXJB/J1jW7grxfT8bFC7C8DzvnohgZtG9IJ7n1QZd3ynVy+/k9+BMG0o6+TXQXiz1Oo7T7zjOWltb23sl8suqiqrerASZUFV83z/lOE4k0K6o6qaqvt7a2trtOE5VS0tLTFU/VNUaVf0NIBaLHfB9/1SwodSukKqqqglV/cPM6jzPOw8wMzNzS1UvqGpYVUc9z/sHWAw+9W+np6evAUSj0X5VPaKqq/l8fhtkx8Q3Nzf3mtkgcA84MTc39yNAU1PTS8AZM3sWWA2FQu7s7OwPAI2Nja+KyPfcn/hz8/PzQxUhgDQ0NHwnIqcD0Aee5w1kMpmtcmMsFjsQDof7ReQicBAYWVhY6NlR8AEQ6uvrH6mpqbkMnA6kZeCqmf0MZIFaETkOdANHAs/I+vp679LSUmFfkJKd9gKfUvk9WRWRjxYXF4d2M+z5MsZisaiZtQe/ijrgGeAv7r8xqXA4nMpkMnsO6sPYd/wL8TPcEwd0n3YAAAAASUVORK5CYII="
+              alt="Copyright"
+            />
             Algorisys Technologies
           </p>
         </div>

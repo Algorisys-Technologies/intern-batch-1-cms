@@ -35,6 +35,8 @@ router.post("/post", async (req, res) => {
     post_content: req.body.post_content,
     created_at: req.body.created_at,
     created_by: req.body.created_by,
+    summary: req.body.summary,
+    post_image: req.body.post_image,
   })
     .then((data) => {
       console.log(data);
@@ -45,7 +47,7 @@ router.post("/post", async (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        status:"failure",
+        status: "failure",
         message: err.message,
       });
     });

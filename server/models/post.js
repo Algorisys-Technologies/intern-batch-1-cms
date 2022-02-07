@@ -21,6 +21,11 @@ const Post = sequelize.define(
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
     },
+    post_image: {
+      require: false,
+      type: Sequelize.STRING,
+      field: "post_image",
+    },
     user_id: {
       //foreignKey: true,
       //autoIncrement: true,
@@ -52,6 +57,11 @@ const Post = sequelize.define(
     post_title: {
       type: Sequelize.STRING,
       field: "post_title",
+      require: false,
+    },
+    summary: {
+      type: Sequelize.STRING,
+      field: "summary",
       require: false,
     },
     categories: {
