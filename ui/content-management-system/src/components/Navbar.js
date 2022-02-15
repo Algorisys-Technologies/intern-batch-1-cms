@@ -32,9 +32,12 @@ const navigationBar = () => {
             </Nav.Link>
             <Nav.Link className="navbarLink" href="#action1">
               <Link to="/">Home</Link>
-            </Nav.Link>{" "}
+            </Nav.Link>
             <Nav.Link className="navbarLink" href="#action2">
               <Link to="/viewpost">Posts</Link>
+            </Nav.Link>
+            <Nav.Link className="navbarLink" href="#action2">
+              <Link to="/blog">Blogs</Link>
             </Nav.Link>
             <Nav.Link className="navbarLink" href="#action2">
               <Link to="/viewdraft">Drafts</Link>

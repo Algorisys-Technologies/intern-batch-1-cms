@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import PostView from "./components/PostView";
 import Dashboard from "./components/Dashboard";
 import Draft from "./components/Draft";
+import Blog from "./components/Blog.jsx";
 function App() {
   return (
     <Router>
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route exact path="/createpost">
             <TextEditor />
+          </Route>
+          <Route exact path="/blog">
+            <Blog />
           </Route>
           <Route exact path="/viewdraft">
             <Draft />

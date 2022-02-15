@@ -16,4 +16,6 @@ dotenv.config();
 app.use(postRoutes);
 app.use(userRoutes);
 
-app.listen(3001);
+app.listen(3001, () => {
+  console.log("Server Started");
+});

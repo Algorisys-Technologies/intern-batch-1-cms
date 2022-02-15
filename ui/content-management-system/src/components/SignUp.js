@@ -25,7 +25,7 @@ export default function SignUp() {
     }
 
     if (
-      !/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(formData.user_email)
+      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData.user_email)
     ) {
       return alert("Email Should be in format 'abc@domain.tld'");
     }
@@ -51,12 +51,10 @@ export default function SignUp() {
       })
       .then(
         (response) => {
-          console.log(response);
           alert(response.data);
         },
         (error) => {
           alert(error.message);
-          console.log(error);
         }
       );
   };

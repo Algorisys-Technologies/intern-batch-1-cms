@@ -37,7 +37,6 @@ export default function Login() {
           alert(response.data);
         })
         .catch(function (error) {
-          console.log(error);
           alert(error.message);
         });
     }
