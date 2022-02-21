@@ -53,9 +53,7 @@ export default function Draft() {
                   />
                   <Card.Body style={{ display: "inline" }}>
                     <Card.Title>{post.post_title}</Card.Title>
-                    <Card.Text>
-                      {TinyMCE.get("myTextarea").setContent(post.post_content)}
-                    </Card.Text>
+                    <Card.Text>{post.post_content.substr(0, 350)}</Card.Text>
                     <Button className="readMorebutton" variant="primary">
                       Read more
                     </Button>

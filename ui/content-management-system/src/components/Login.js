@@ -19,6 +19,8 @@ export default function Login() {
     }
   };
 
+  let authenticated = false;
+  var user_name;
   const authenticationAPI = async (e) => {
     e.preventDefault();
     if (email === "") {
@@ -34,15 +36,16 @@ export default function Login() {
           user_password: password,
         })
         .then(function (response) {
-          alert(response.data);
+          alert(response.data[0]);
+          console.log(response.data);
+          authenticated = true;
+          user_name = response.data[1];
+          localStorage.setItem("user_name", user_name);
         })
         .catch(function (error) {
           alert(error.message);
         });
     }
-    // console.log("test");
-    // setTimeout(console.log("test"), 10000);
-    // console.log("test");
   };
 
   return (

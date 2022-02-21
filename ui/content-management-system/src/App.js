@@ -11,7 +11,23 @@ import Dashboard from "./components/Dashboard";
 import Draft from "./components/Draft";
 import Blog from "./components/Blog.jsx";
 import CreateBlog from "./components/CreateBlog";
+// import Avatar from "react-avatar";
+import { useEffect } from "react";
+
 function App() {
+  // useEffect(() => {
+  //   if (localStorage.user_name != null) {
+  //     return (
+  //       <Avatar
+  //         color={Avatar.getRandomColor("sitebase", ["red", "green", "blue"])}
+  //         name={localStorage.getItem("user_name")}
+  //         round={true}
+  //         size={40}
+  //       />
+  //     );
+  //   }
+  // }, []);
+
   return (
     <Router>
       <Navbar />
@@ -20,17 +36,11 @@ function App() {
           <Route exact path="/">
             <HomePage />
           </Route>
-          <Route exact path="/Login">
-            <Login />
-          </Route>
           <Route exact path="/SignUp">
             <SignUp />
           </Route>
           <Route exact path="/createpost">
             <TextEditor />
-          </Route>
-          <Route exact path="/blog">
-            <Blog />
           </Route>
           <Route exact path="/viewdraft">
             <Draft />
@@ -41,8 +51,8 @@ function App() {
           <Route exact path="/viewpost">
             <PostView />
           </Route>
-          <Route exact path="/createblog">
-            <CreateBlog />
+          <Route exact path="/Login">
+            <Login />
           </Route>
         </Switch>
       </div>

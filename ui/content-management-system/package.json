@@ -24,6 +24,7 @@
     "react-scripts": "4.0.3",
     "react-search-field": "^2.0.1",
     "react-tinymce": "^0.7.0",
+    "sass": "^1.49.8",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

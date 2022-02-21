@@ -16,6 +16,12 @@ router.get("/getUser", async (req, res) => {
   // console.log(process.env);
 });
 
+//GET USERNAME BY USER EMAIL
+// router.get("/getUser/:email", async (req, res) => {
+//   const user = await User.findOne({ where: { user_email: req.params.email } });
+//   return res.send(user.user_name);
+// });
+
 //REGISTER-USER/SIGNUP
 router.post("/register", async (req, res) => {
   // Check whether user email exists already
@@ -88,7 +94,7 @@ router.post("/login", async (req, res) => {
   }
 
   if (user.user_email_verified) {
-    res.status(200).send("Sign-in successfully!!");
+    res.status(200).send(["Sign-in successfully!!", user.user_name]);
   }
 });
 
