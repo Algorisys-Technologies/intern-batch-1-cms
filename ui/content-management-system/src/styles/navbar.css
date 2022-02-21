@@ -1,7 +1,9 @@
 .navbar {
-  /* float: left; */
-  margin: auto;
-  width: 100%;
+  background-color: #fbfefd;
+  font-weight: 800;
+  box-shadow: -20px -3px 15px 3px #c2c2c2;
+  font-family: "Rubik", sans-serif;
+  padding: 0px 0px;
 }
 a {
   text-decoration: none;
@@ -25,6 +27,16 @@ a {
 }
 
 .navbarLink a {
-  color: black;
+  color: #707070;
   text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+#navLogo {
+  margin-left: 0;
+  padding: 0;
 }

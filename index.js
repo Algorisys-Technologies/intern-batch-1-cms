@@ -49,7 +49,7 @@
       updated_at: Sequelize.TIME,
       created_by: Sequelize.STRING,
       updated_by: Sequelize.STRING,
-    }
+    },
     "blog",
     {
       blog_id:
@@ -59,7 +59,7 @@
         require: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
-      };
+      },
       user_id:
       {
         foreignKey: true,
@@ -67,7 +67,7 @@
         require: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
-      }
+      },
       blog_title:
       {
         type: Sequelize.STRING,
@@ -80,13 +80,13 @@
         fiels: "status",
         require: true,
 
-      };
+      },
       created_at: Sequelize.TIME,
       updated_at: Sequelize.TIME,
       created_by: Sequelize.STRING,
       updated_by: Sequelize.STRING,
 
-    }
+    },
     "categories":
     {
       category_id:

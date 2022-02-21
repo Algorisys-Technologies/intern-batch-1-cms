@@ -10,6 +10,7 @@ import PostView from "./components/PostView";
 import Dashboard from "./components/Dashboard";
 import Draft from "./components/Draft";
 import Blog from "./components/Blog.jsx";
+import CreateBlog from "./components/CreateBlog";
 function App() {
   return (
     <Router>
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route exact path="/viewpost">
             <PostView />
+          </Route>
+          <Route exact path="/createblog">
+            <CreateBlog />
           </Route>
         </Switch>
       </div>

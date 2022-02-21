@@ -1,3 +1,7 @@
+body {
+  background-color: #fbfefd;
+}
+
 .reactions {
   width: "120px";
   background-color: "transparent";
@@ -9,6 +13,14 @@
   left: 120px;
   transition: 0.6s linear;
 }
+.postCard {
+  transition: all 0.4s ease-in-out;
+}
 .readMorebutton:hover {
-  background-color: rgb(23, 168, 23);
+  background: rgb(15, 17, 16);
+}
+
+.postCard:hover {
+  transform: scale(1.023);
+  color: rgb(33, 151, 187);
 }

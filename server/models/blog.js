@@ -11,51 +11,30 @@ const sequelize = new Sequelize(
     dialect: "postgres",
   }
 );
-const Post = sequelize.define(
-  "post",
+const Blog = sequelize.define(
+  "blog",
   {
-    post_id: {
+    blog_id: {
       primaryKey: true,
       autoIncrement: true,
       require: true,
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
     },
-    post_image: {
+    blog_image: {
       require: false,
       type: Sequelize.STRING,
-      field: "post_image",
+      field: "blog_image",
     },
     user_id: {
-      //foreignKey: true,
-      //autoIncrement: true,
+      foreignKey: true,
       require: true,
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
     },
-    post_type_id: {
-      //foreignKey: true,
-      //autoIncrement: true,
-      require: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
-    },
-    blog_id: {
-      //foreignKey: true,
-      //autoIncrement: true,
-      require: true,
-      type: Sequelize.UUID,
-    },
-    tag_id: {
-      //foreignKey: true,
-      //autoIncrement: true,
-      require: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
-    },
-    post_title: {
+    blog_title: {
       type: Sequelize.STRING,
-      field: "post_title",
+      field: "blog_title",
       require: false,
     },
     summary: {
@@ -63,26 +42,13 @@ const Post = sequelize.define(
       field: "summary",
       require: false,
     },
-    categories: {
-      type: Sequelize.STRING,
-      field: "categories",
-      require: false,
-    },
+
     status: {
       type: Sequelize.BOOLEAN,
       field: "status",
       require: true,
     },
-    post_content: {
-      type: Sequelize.STRING,
-      field: "post_content",
-      require: false,
-    },
-    path: {
-      type: Sequelize.STRING,
-      fields: "path",
-      require: false,
-    },
+
     created_at: {
       type: Sequelize.TIME,
       require: true,
@@ -100,4 +66,4 @@ const Post = sequelize.define(
   }
 );
 
-module.exports = Post;
+module.exports = Blog;

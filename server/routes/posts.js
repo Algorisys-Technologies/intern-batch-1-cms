@@ -30,6 +30,7 @@ router.post("/post", async (req, res) => {
   const post = Post.create({
     user_id: req.body.user_id,
     post_title: req.body.post_title,
+    blog_id: req.body.blog_id,
     categories: req.body.categories,
     status: req.body.status,
     post_content: req.body.post_content,

@@ -5,6 +5,7 @@ const cors = require("cors"); // handling cross origin request site block
 const dotenv = require("dotenv");
 
 const postRoutes = require("./routes/posts");
+const blogRoutes = require("./routes/blog");
 const userRoutes = require("./routes/user");
 
 app.use(express.json()); // parse request body
@@ -15,7 +16,8 @@ dotenv.config();
 //Routes
 app.use(postRoutes);
 app.use(userRoutes);
+app.use(blogRoutes);
 
 app.listen(3001, () => {
-  console.log("Server Started");
+  console.log("Listening on Port: 3001");
 });
