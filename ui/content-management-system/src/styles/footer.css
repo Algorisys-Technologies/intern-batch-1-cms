@@ -1,14 +1,19 @@
 .footer-content {
+  padding: 0;
   overflow-y: auto;
   width: 100%;
-  background-color: lightblue;
-  float: left;
-  text-align: left;
-  margin-top: 60px;
+  background-color: #74b9ff;
+  text-align: center;
 }
 
 .social-icons {
   margin-bottom: 20;
   text-decoration: "none";
   display: "inline";
+}
+.bd-container {
+  max-width: 1200px;
+}
+.section {
+  padding: 2rem 0px 1.5rem 0px;
 }

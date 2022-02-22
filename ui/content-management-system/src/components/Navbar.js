@@ -21,6 +21,7 @@ const NavigationBar = () => {
   //Show whether user has logged in
   const [show, setShow] = useState(true);
   const [userName, setUserName] = useState(localStorage.getItem("user_name"));
+
   useEffect(() => {
     console.log("UseEffect");
     const userLoggedIn = localStorage.getItem("user_name");
@@ -29,7 +30,7 @@ const NavigationBar = () => {
     } else {
       setShow(true);
     }
-  }, [show]);
+  }, show);
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -42,14 +43,12 @@ const NavigationBar = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="mx-auto my-2 my-lg-0"
-            style={{ maxHeight: "80px" }}
-            navbarScroll
-          >
-            <Nav.Link className="navbarLink" href="#action1">
-              <Link to="/dashboard"> Dashboard</Link>
-            </Nav.Link>
+          <Nav style={{ maxHeight: "80px" }} navbarScroll>
+            {!show && (
+              <Nav.Link className="navbarLink" href="#action1">
+                <Link to="/dashboard"> Dashboard</Link>
+              </Nav.Link>
+            )}
             {/* <Nav.Link className="navbarLink" href="#action1">
               <Link to="/">Home</Link>
             </Nav.Link> */}
@@ -62,13 +61,17 @@ const NavigationBar = () => {
               </Link>
             </Nav.Link>
 
-            <Nav.Link className="navbarLink" href="#action2">
-              <Link to="/viewdraft">Drafts</Link>
-            </Nav.Link>
-            <Nav.Link className="navbarLink" href="#action2">
-              <Link to="/createpost"> Design</Link>
-            </Nav.Link>
-            {localStorage.getItem("user_name") === null && (
+            {!show && (
+              <>
+                <Nav.Link className="navbarLink" href="#action2">
+                  <Link to="/viewdraft">Drafts</Link>
+                </Nav.Link>
+                <Nav.Link className="navbarLink" href="#action2">
+                  <Link to="/createpost"> Design</Link>
+                </Nav.Link>
+              </>
+            )}
+            {show && (
               <Nav.Link className="navbarLink" href="#action2">
                 <Link
                   style={{ color: "#2197bb", fontWeight: "bold" }}
@@ -78,17 +81,19 @@ const NavigationBar = () => {
                 </Link>
               </Nav.Link>
             )}
-            <NavDropdown
-              title="Blogs"
-              className="navbarLink"
-              id="navbarScrollingDropdown"
-            >
-              <NavDropdown.Item>
-                <Link to="/createblog">New Blog</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Edit blogs</NavDropdown.Item>
-              <NavDropdown.Divider />
-            </NavDropdown>
+            {!show && (
+              <NavDropdown
+                title="Blogs"
+                className="navbarLink"
+                id="navbarScrollingDropdown"
+              >
+                <NavDropdown.Item>
+                  <Link to="/createblog">New Blog</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action4">Edit blogs</NavDropdown.Item>
+                <NavDropdown.Divider />
+              </NavDropdown>
+            )}
             {/* <Nav.Link className="navbarLink" href="#action6">
               Notifications
             </Nav.Link> */}
@@ -108,7 +113,7 @@ const NavigationBar = () => {
         </Navbar.Collapse>
 
         {!show && (
-          <p style={{ marginTop: "15px", marginLeft: "5px" }}>
+          <p style={{ marginLeft: "5px" }}>
             <Avatar
               color={Avatar.getRandomColor("sitebase", [
                 "red",
@@ -119,7 +124,15 @@ const NavigationBar = () => {
               round={true}
               size={40}
             />
-            {localStorage.getItem("user_name")}
+            <p
+              style={{
+                display: "inline",
+                marginLeft: "10px",
+                color: "rgba(0,0,0,.5)",
+              }}
+            >
+              {localStorage.getItem("user_name")}
+            </p>
           </p>
         )}
       </Container>

@@ -20,7 +20,6 @@ router.post("/create/blog", async (req, res) => {
     blog_image: req.body.blog_image,
   })
     .then((data) => {
-      console.log(data);
       res.send({
         status: "success",
         message: "Blog saved successfully",

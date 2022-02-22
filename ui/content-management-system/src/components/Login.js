@@ -4,14 +4,17 @@ import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../styles/Login.css";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
+  const history = useHistory();
+  // const Redirect = () => {
+  //   return <Redirect to="/" />;
+  // };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleChange = (value, type = "mail") => {
-    // setEmail(e.target.value);
-    // console.log(value);
     if (type === "mail") {
       setEmail(value);
     } else {
@@ -41,6 +44,8 @@ export default function Login() {
           authenticated = true;
           user_name = response.data[1];
           localStorage.setItem("user_name", user_name);
+          history.push("/");
+          window.location.reload();
         })
         .catch(function (error) {
           alert(error.message);

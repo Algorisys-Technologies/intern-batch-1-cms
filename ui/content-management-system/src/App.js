@@ -15,19 +15,6 @@ import CreateBlog from "./components/CreateBlog";
 import { useEffect } from "react";
 
 function App() {
-  // useEffect(() => {
-  //   if (localStorage.user_name != null) {
-  //     return (
-  //       <Avatar
-  //         color={Avatar.getRandomColor("sitebase", ["red", "green", "blue"])}
-  //         name={localStorage.getItem("user_name")}
-  //         round={true}
-  //         size={40}
-  //       />
-  //     );
-  //   }
-  // }, []);
-
   return (
     <Router>
       <Navbar />
@@ -42,6 +29,9 @@ function App() {
           <Route exact path="/createpost">
             <TextEditor />
           </Route>
+          <Route exact path="/blog">
+            <Blog />
+          </Route>
           <Route exact path="/viewdraft">
             <Draft />
           </Route>
@@ -51,7 +41,10 @@ function App() {
           <Route exact path="/viewpost">
             <PostView />
           </Route>
-          <Route exact path="/Login">
+          <Route exact path="/createblog">
+            <CreateBlog />
+          </Route>
+          <Route exact path="/login">
             <Login />
           </Route>
         </Switch>

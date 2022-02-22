@@ -36,8 +36,8 @@ const AddPost = () => {
               <li style={{ display: "inline" }}>
                 <Card
                   style={{
-                    width: "22rem",
-                    height: "38rem",
+                    width: "19rem",
+                    height: "30rem",
                     margin: "30px 30px",
                     borderRadius: "40px",
                     // boxShadow: "-3px -3px 15px 1px #c2c2c2",
@@ -51,9 +51,10 @@ const AddPost = () => {
                   <Card.Img
                     variant="top"
                     style={{
-                      width: "22rem",
+                      textAlign: "center",
+                      width: "18rem",
                       objectFit: "contain",
-                      height: "15rem",
+                      height: "12rem",
                     }}
                     className="mt-3"
                     src={post.post_image}
@@ -63,9 +64,13 @@ const AddPost = () => {
                       {post.post_title}
                     </Card.Title>
                     <Card.Text>
-                      {post.summary.substring(0, 250) + "..."}
+                      {post.summary.substring(0, 100) + "..."}
                     </Card.Text>
-                    <Button className="readMorebutton" variant="primary">
+                    <Button
+                      className="readMorebutton"
+                      variant="primary"
+                      style={{ marginLeft: "-5%" }}
+                    >
                       Read more
                     </Button>
                     <br />

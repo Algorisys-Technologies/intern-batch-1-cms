@@ -41,14 +41,14 @@ export default function CreateBlog() {
     // post blog using axios
     axios
       .post("http://localhost:3001/create/blog", {
-        user_id: "ed4bd1ed-d329-492c-abd7-09ca1b143032",
+        user_id: "e5783689-a475-413f-991b-31764ff4268f", //Change with your database id
         status: "true",
         blog_title: formData.blog_title,
         summary: formData.summary,
         blog_image: imageDataBlog,
         created_at: "12:10:00+14:59",
         updated_at: null,
-        created_by: "Murtuza",
+        created_by: "Zaki",
         updated_by: null,
       })
       .then(
