@@ -65,7 +65,7 @@ router.post("/login", async (req, res) => {
     where: { user_email: req.body.user_email },
   });
   if (!user) {
-    return res.status(404).send("User not found");
+    return res.send({ status: 404, message: "User not found" });
   }
   var passwordIsValid = bcrypt.compareSync(
     req.body.user_password,
@@ -74,7 +74,7 @@ router.post("/login", async (req, res) => {
 
   // Check password validity
   if (!passwordIsValid) {
-    return res.send("Invalid Email OR password !!").status(400);
+    return res.send({ status: 400, message: "Invalid Email OR password !!" });
   }
   // LOGIC TO CHECK USER IS VERFIED OR NOT
   if (!user.user_email_verified) {
@@ -94,7 +94,11 @@ router.post("/login", async (req, res) => {
   }
 
   if (user.user_email_verified) {
-    res.status(200).send(["Sign-in successfully!!", user.user_name]);
+    res.send({
+      message: "Sign-in successfully!!",
+      username: user.user_name,
+      status: 200,
+    });
   }
 });
 

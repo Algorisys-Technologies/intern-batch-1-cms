@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 import PostView from "./components/PostView";
 import Dashboard from "./components/Dashboard";
 import Draft from "./components/Draft";
-import Blog from "./components/Blog.jsx";
+import Blog from "./components/Blog";
 import CreateBlog from "./components/CreateBlog";
 // import Avatar from "react-avatar";
 import { useEffect } from "react";

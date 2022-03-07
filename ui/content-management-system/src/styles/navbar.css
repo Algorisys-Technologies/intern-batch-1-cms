@@ -41,6 +41,7 @@ a {
   padding: 0;
 }
 
-#navbarScroll {
-  margin: 0px !important;
+.active,
+.dot:hover {
+  background-color: transparent;
 }

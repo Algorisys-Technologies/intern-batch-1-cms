@@ -56,7 +56,7 @@ const NavigationBar = () => {
               <Link to="/viewpost">Posts</Link>
             </Nav.Link>
             <Nav.Link className="navbarLink" href="#action2">
-              <Link style={{ color: "#2197bb", fontWeight: "bold" }} to="/blog">
+              <Link style={{ fontWeight: "bold" }} to="/blog">
                 Blogs
               </Link>
             </Nav.Link>

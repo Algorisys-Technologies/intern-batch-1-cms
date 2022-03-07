@@ -10,16 +10,13 @@ function HomePage() {
     <div>
       <a href="#" className="scrolltop" id="scroll-top">
         <span>
-          {" "}
           <i className="bx bx-chevron-up scrolltop__icon"></i>
         </span>
       </a>
       <main className="l-main">
-        {/* HOME */}
         <section className="home" id="home">
           <div className="home__container bd-container bd-grid">
             <div className="home__data">
-              <style></style>
               <h1 className="home__title">Content Management</h1>
               <br />
               <h2 className="home__subtitle">
@@ -141,23 +138,103 @@ function HomePage() {
         </section>
 
         {/* <!--========== CONTACT US ==========--> */}
+        <span className="section-subtitle ">Let's talk</span>
         <section className="contact section bd-container" id="contact">
           <div className="contact__container bd-grid">
             <div className="contact__data">
-              <span className="section-subtitle contact__initial">
-                Let's talk
-              </span>
               <h2 className="section-title contact__initial">Contact us</h2>
-              <p className="contact__description">
-                If you have any query connect with us.
-              </p>
+              <div className="contact section bd-container">
+                <form>
+                  <label for="fname">First Name</label>
+                  <input
+                    type="text"
+                    id="fname"
+                    name="firstname"
+                    placeholder="Your name.."
+                  />
+
+                  <label for="lname">Last Name</label>
+                  <input
+                    type="text"
+                    id="lname"
+                    name="lastname"
+                    placeholder="Your last name.."
+                  />
+
+                  <label for="subject">Subject</label>
+                  <textarea
+                    id="subject"
+                    name="subject"
+                    placeholder="Write something.."
+                    style={{ height: "200px" }}
+                  ></textarea>
+
+                  <div className="contact__button">
+                    <a href="#" className="button">
+                      Contact us now
+                    </a>
+                  </div>
+                </form>
+              </div>
             </div>
 
-            <div className="contact__button">
-              <a href="#" className="button">
-                Contact us now
+            {/* <div className="mySlides">
+                <q>I love creating and writing blogs using CMS.</q>
+                <p className="author">- xyz</p>
+              </div>
+
+              <div className="mySlides">
+                <q>By using CMS my writing skills are much better.</q>
+                <p className="author">- lmn</p>
+              </div>
+
+              <div className="mySlides">
+                <q>It's fun.</q>
+                <p className="author">- pqr</p>
+              </div>
+
+              <a className="prev" onclick="plusSlides(-1)">
+                &lt;
               </a>
+              <a className="next" onclick="plusSlides(1)">
+                &gt;
+              </a> */}
+            <div className="footer__content">
+              <h3 className="footer__title">Address</h3>
+              <ul>
+                <li>
+                  {" "}
+                  <a>Algorisys Technologies Pvt. Ltd.</a>
+                </li>
+                <div className="mapouter">
+                  <div
+                    className="gmap_canvas"
+                    style={{
+                      height: "550px",
+                    }}
+                  >
+                    <iframe
+                      className="gmap_iframe"
+                      width="100%"
+                      frameBorder={0}
+                      scrolling="no"
+                      marginHeight={0}
+                      marginWidth={0}
+                      src="https://maps.google.com/maps?width=150&height=3000&hl=en&q=Gold Crest Business Park, 2nd Floor, 208-209, Opp. Shreyas Cinema, LBS Rd, Ghatkopar(W) Mumbai, Maharashtra 400086&t=&z=3&ie=UTF8&iwloc=B&output=embed"
+                    />
+                    <a href="https://kokagames.com/">Koka Games</a>
+                  </div>
+                  <style
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        ".mapouter{position:relative;text-align:right;width:100%;height:100px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:100px;}.gmap_iframe {height:500px!important;width:350px!important;}",
+                    }}
+                  />
+                </div>
+              </ul>
             </div>
+
+            {/* <img src="assets/img/home.png" alt="" className="home__img"> */}
           </div>
         </section>
       </main>

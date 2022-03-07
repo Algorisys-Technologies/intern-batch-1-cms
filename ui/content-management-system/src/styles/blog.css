@@ -10,3 +10,8 @@
 .blogs {
   cursor: pointer;
 }
+
+.container {
+  background-color: transparent;
+  padding: unset;
+}

@@ -421,7 +421,7 @@ img {
     margin-right: var(--mb-2);
   }
   &__title {
-    font-size: var(--h2-font-size);
+    font-size: var(--h1-font-size);
     color: var(--title-color);
     margin-bottom: var(--mb-2);
   }
@@ -469,7 +469,7 @@ img {
   .contact {
     &__container {
       grid-template-columns: 1.75fr 1fr;
-      align-items: center;
+      align-items: start;
     }
     &__button {
       justify-self: center;
@@ -555,4 +555,163 @@ img {
   .home__container {
     height: 640px;
   }
+}
+
+@media screen and (min-height: 721px) {
+  .home__container {
+    height: 640px;
+  }
+}
+.header img {
+  float: left;
+  width: px;
+  height: px;
+  background: rgb(255, 254, 254);
+}
+
+.header h1 {
+  position: relative;
+  top: 18px;
+  left: 10px;
+}
+
+.jc-center {
+  justify-content: center;
+}
+
+#spin {
+  color: #2197bb;
+}
+#spin:after {
+  content: "Manage";
+  animation: spin 9s linear infinite;
+}
+@keyframes spin {
+  0% {
+    content: "Design";
+  }
+  20% {
+    content: "Write";
+  }
+  40% {
+    content: "Post";
+  }
+  60% {
+    content: "Blog";
+  }
+  80% {
+    content: "Publish";
+  }
+}
+
+/* Style inputs with type="text", select elements and textareas */
+input[type="text"],
+select,
+textarea {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type="submit"] {
+  background-color: #2197bb;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #2197bb;
+}
+
+/* Add a background color and some padding around the form */
+.container {
+  border-radius: 7px;
+  background-color: #a6a6a6;
+  padding: 200px;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  background: #f1f1f1f1;
+}
+
+/* Slides */
+.mySlides {
+  display: none;
+  padding: 80px;
+  text-align: center;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -30px;
+  padding: 16px;
+  color: #ddd;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  position: absolute;
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: #0f1110;
+  color: white;
+}
+
+/* The dot/bullet/indicator container */
+.dot-container {
+  text-align: center;
+  padding: 20px;
+  background: #ddd;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #ddd;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+/* Add a background color to the active dot/circle */
+.active,
+.dot:hover {
+  background-color: #ddd;
+}
+
+/* Add an italic font style to all quotes */
+q {
+  font-style: italic;
+}
+
+/* Add a blue color to the author */
+.author {
+  color: #2197bb;
 }

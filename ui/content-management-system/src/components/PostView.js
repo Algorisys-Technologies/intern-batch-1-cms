@@ -51,9 +51,8 @@ const AddPost = () => {
                   <Card.Img
                     variant="top"
                     style={{
-                      textAlign: "center",
-                      width: "18rem",
-                      objectFit: "contain",
+                      width: "19rem",
+
                       height: "12rem",
                     }}
                     className="mt-3"
@@ -66,11 +65,7 @@ const AddPost = () => {
                     <Card.Text>
                       {post.summary.substring(0, 100) + "..."}
                     </Card.Text>
-                    <Button
-                      className="readMorebutton"
-                      variant="primary"
-                      style={{ marginLeft: "-5%" }}
-                    >
+                    <Button className="readMorebutton" variant="primary">
                       Read more
                     </Button>
                     <br />

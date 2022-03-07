@@ -39,13 +39,15 @@ export default function Login() {
           user_password: password,
         })
         .then(function (response) {
-          alert(response.data[0]);
-          console.log(response.data);
-          authenticated = true;
-          user_name = response.data[1];
-          localStorage.setItem("user_name", user_name);
-          history.push("/");
-          window.location.reload();
+          if (response.data.status == 400 || response.data.status == 404) {
+            alert(response.data.message);
+          } else {
+            authenticated = true;
+            user_name = response.data.username;
+            localStorage.setItem("user_name", user_name);
+            history.push("/");
+            window.location.reload();
+          }
         })
         .catch(function (error) {
           alert(error.message);
