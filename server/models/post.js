@@ -46,7 +46,7 @@ const Post = sequelize.define(
       require: true,
       type: Sequelize.UUID,
     },
-    tag_id: {
+    tag_name: {
       //foreignKey: true,
       //autoIncrement: true,
       require: true,

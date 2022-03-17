@@ -22,11 +22,13 @@ function HomePage() {
               <h2 className="home__subtitle">
                 With us you can <span id="spin"></span>
               </h2>
-              <Link to="/signup">
-                <a href="#" className="button">
-                  SignUp
-                </a>
-              </Link>
+              {localStorage.getItem("user_name") == undefined && (
+                <Link to="/signup">
+                  <a href="#" className="button">
+                    SignUp
+                  </a>
+                </Link>
+              )}
             </div>
 
             <img src={Home} alt="" className="home__img" />

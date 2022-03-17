@@ -5,7 +5,7 @@ const { Sequelize, where } = require("sequelize");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const sendVerificationEmail = require("../helper/user");
-
+const sendResetPasswordEmail = require("../helper/forgotPassword");
 const req = require("express/lib/request");
 const res = require("express/lib/response");
 
@@ -13,6 +13,19 @@ const res = require("express/lib/response");
 router.get("/getUser", async (req, res) => {
   const user = await User.findAll();
   res.send(user);
+  // console.log(process.env);
+});
+
+//GET USER ID by Username
+router.get("/getUser/:user_email", async (req, res) => {
+  const user = await User.findOne({
+    where: { user_email: req.params.user_email },
+  });
+  res.send({
+    status: 200,
+    message: "User found",
+    user_id: user.user_id,
+  });
   // console.log(process.env);
 });
 
@@ -103,6 +116,56 @@ router.post("/login", async (req, res) => {
       status: 200,
     });
   }
+});
+
+//Send forget Password email
+router.post("/resetPasswordEmail", async (req, res) => {
+  console.log("Request Initiated");
+  const user = await User.findOne({
+    where: { user_email: req.body.user_email },
+  });
+
+  if (!user) {
+    res.send({
+      status: "400",
+      message: "Bad Request!!",
+    });
+  } else {
+    sendResetPasswordEmail(
+      `http://localhost:3000/changepassword/?user_id=${user.user_id}`,
+      user.user_email
+    );
+    res.send({
+      status: 200,
+      message: "Email sent successfully",
+    });
+  }
+});
+
+//RESET PASSWORD
+router.put(`/changepassword/user_id=:user_id`, async (req, res) => {
+  const salt = await bcrypt.genSalt(10);
+  console.log(req.body.user_password);
+  //res.send(req.body.password);
+
+  req.body.user_password = await bcrypt.hash(req.body.user_password, salt);
+
+  User.update(
+    { user_password: req.body.user_password },
+    { where: { user_id: req.params.user_id } }
+  )
+    .then((data) => {
+      res.send({
+        message: "Password updated successfully",
+        status: 200,
+      });
+    })
+    .catch((err) => {
+      res.send({
+        message: err.message,
+        status: 500,
+      });
+    });
 });
 
 //ACTIVATE USER BY EMAIL VERIFICATION

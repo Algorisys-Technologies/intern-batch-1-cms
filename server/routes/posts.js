@@ -25,6 +25,20 @@ router.get("/getUserPost", async (req, res) => {
   }
 });
 
+//GET POST BY POST ID
+router.get("/postContent/:post_id", async (req, res) => {
+  const post = await Post.findOne({
+    where: {
+      post_id: req.params.post_id,
+    },
+  });
+  if (!(post.length == 0)) {
+    res.send(post);
+  } else {
+    res.send("Post does not exist for the given user");
+  }
+});
+
 //POST A NEW POST
 router.post("/post", async (req, res) => {
   const post = Post.create({

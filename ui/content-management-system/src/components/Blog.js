@@ -32,7 +32,7 @@ export default function Blog() {
             <div
               className="blogs py-1 w-75 d-flex"
               style={{
-                marginTop: "30px",
+                marginTop: "20px",
                 borderRadius: "25px",
                 paddingLeft: "30px",
                 paddingRight: "30px",

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 import "../styles/navbar.css";
 //import SearchField from "react-search-field";
 import Avatar from "react-avatar";
@@ -21,6 +23,7 @@ const NavigationBar = () => {
   //Show whether user has logged in
   const [show, setShow] = useState(true);
   const [userName, setUserName] = useState(localStorage.getItem("user_name"));
+  const history = useHistory();
 
   useEffect(() => {
     console.log("UseEffect");
@@ -31,6 +34,13 @@ const NavigationBar = () => {
       setShow(true);
     }
   }, show);
+
+  const handleLogOut = () => {
+    localStorage.removeItem("user_name");
+    history.push("/");
+    window.location.reload();
+  };
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -113,7 +123,7 @@ const NavigationBar = () => {
         </Navbar.Collapse>
 
         {!show && (
-          <p style={{ marginLeft: "5px" }}>
+          <p style={{ marginLeft: "5px" }} className="User-profile">
             <Avatar
               color={Avatar.getRandomColor("sitebase", [
                 "red",
@@ -133,6 +143,20 @@ const NavigationBar = () => {
             >
               {localStorage.getItem("user_name")}
             </p>
+            <div className="User-profile-content">
+              <button
+                onClick={() => {
+                  handleLogOut();
+                }}
+                style={{
+                  border: "none",
+                  backgroundColor: "transparent",
+                  marginLeft: "30px",
+                }}
+              >
+                Log out
+              </button>
+            </div>
           </p>
         )}
       </Container>

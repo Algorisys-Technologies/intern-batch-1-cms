@@ -80,7 +80,9 @@ export default function Login() {
         <Button variant="success" type="submit" onClick={authenticationAPI}>
           Sign In
         </Button>
-        <p>Forgot Password</p>
+        <Link to="/ForgotPassword">
+          <p>Forgot Password</p>
+        </Link>
         <p>
           <Link to="/signup">New User / Sign Up</Link>
         </p>

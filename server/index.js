@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const postRoutes = require("./routes/posts");
 const blogRoutes = require("./routes/blog");
 const userRoutes = require("./routes/user");
+const TagRoutes = require("./routes/tags");
 
 app.use(express.json()); // parse request body
 app.use(cors("*"));
@@ -17,6 +18,7 @@ dotenv.config();
 app.use(postRoutes);
 app.use(userRoutes);
 app.use(blogRoutes);
+app.use(TagRoutes);
 
 app.listen(3001, () => {
   console.log("Listening on Port: 3001");

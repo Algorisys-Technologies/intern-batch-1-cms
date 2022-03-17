@@ -12,13 +12,15 @@ import Draft from "./components/Draft";
 import Blog from "./components/Blog";
 import CreateBlog from "./components/CreateBlog";
 import Post from "./components/Post";
+import ChangePassword from "./components/ForgotPassword2";
+import ForgotPassword from "./components/ForgotPassword1";
 import UpdatePostContent from "./components/updatePostContent";
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <div className="App">
+      <div className="App" style={{ minHeight: "47.7vh" }}>
         <Switch>
           <Route exact path="/">
             <HomePage />
@@ -28,6 +30,12 @@ function App() {
           </Route>
           <Route exact path="/createpost">
             <TextEditor />
+          </Route>
+          <Route exact path="/updatepost">
+            <UpdatePostContent />
+          </Route>
+          <Route path="/changepassword">
+            <ChangePassword />
           </Route>
           <Route exact path="/blog">
             <Blog />
@@ -41,6 +49,9 @@ function App() {
           <Route exact path="/viewpost">
             <PostView />
           </Route>
+          <Route exact path="/postContent">
+            <Post />
+          </Route>
           <Route exact path="/createblog">
             <CreateBlog />
           </Route>
@@ -52,6 +63,12 @@ function App() {
           </Route>
           <Route exact path="/updatepost">
             <UpdatePostContent />
+            <Route/>
+          <Route path="/ForgotPassword">
+            <ForgotPassword />
+          </Route>
+          <Route exact path="/resetPassword">
+            <ChangePassword />
           </Route>
         </Switch>
       </div>

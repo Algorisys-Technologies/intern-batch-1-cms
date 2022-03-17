@@ -1,13 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button, Dropdown, Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
 import axios from "axios";
 import Loader from "./Loader";
 import { ImagePicker } from "react-file-picker";
+import "../styles/TextEditor.css";
+// import tinymce from "@tinymce/tinymce-react";
+import tinymce from "react-tinymce";
 
-export default function App() {
+export default function TextEditor() {
   const [category, setCategory] = useState("Category");
   const [tag, setTag] = useState([]);
   const [content, setContent] = useState("");
@@ -20,6 +23,8 @@ export default function App() {
   const [blog, setBlog] = useState("Blogs");
   const [blogName, setBlogName] = useState([]);
   const [blogId, setBlogId] = useState(" ");
+  const [postContent, setPostContent] = useState(" ");
+
   const postHandler = async () => {
     if (summary && imageData)
       try {
@@ -43,6 +48,7 @@ export default function App() {
     }
   };
 
+  //Get Blog name values from database
   useEffect(() => {
     axios
       .get("http://localhost:3001/get/blog")
@@ -71,6 +77,7 @@ export default function App() {
         await axios.post("http://localhost:3001/post", {
           user_id: "871ecb13-a972-48da-ac4d-9dc9a0088365",
           post_title: title,
+          blog_id: blogId,
           categories: category,
           status: false,
           post_content: editorRef.current.getContent(),
@@ -159,13 +166,15 @@ export default function App() {
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <Dropdown style={{ display: "inline" }} className="ml-2">
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              {category}
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              {/* Later add categories array below*/}
+          <div className="dropdown">
+            <button className="editor-button">{category}</button>
+            <div className="dropdown-content">
+              {/* <p>Personal</p>
+              <p>Business/corporate</p>
+              <p>Fashion</p>
+              <p>Travel</p>
+              <p>Food</p>
+              <p>Other</p> */}
               {[
                 "Personal",
                 "Business/corporate",
@@ -174,38 +183,35 @@ export default function App() {
                 "Food",
               ].map((value) => {
                 return (
-                  <Dropdown.Item
-                    href="#/action-1"
-                    onSelect={() => setCategory(value)}
+                  <button
+                    style={{ border: "none", backgroundColor: "transparent" }}
+                    onClick={() => setCategory(value)}
                   >
                     {value}
-                  </Dropdown.Item>
+                  </button>
                 );
               })}
-            </Dropdown.Menu>
-          </Dropdown>
-          <Dropdown style={{ display: "inline" }} className="ml-2">
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              {blog}
-            </Dropdown.Toggle>
+            </div>
+          </div>
 
-            {/* Later add blogs array below*/}
-
-            <Dropdown.Menu>
+          <div className="dropdown">
+            <button className="editor-button">{blog}</button>
+            <div className="dropdown-content">
               {blogName.map((value) => {
                 return (
-                  <Dropdown.Item
-                    onSelect={() => {
-                      setBlog(value.blog_title);
-                      setBlogId(value.blog_id);
+                  <button
+                    style={{ border: "none", backgroundColor: "transparent" }}
+                    onClick={async () => {
+                      await setBlog(value.blog_title);
+                      await setBlogId(value.blog_id);
                     }}
                   >
                     {value.blog_title}
-                  </Dropdown.Item>
+                  </button>
                 );
               })}
-            </Dropdown.Menu>
-          </Dropdown>
+            </div>
+          </div>
         </div>
 
         <div>
@@ -301,8 +307,9 @@ export default function App() {
           />
           &nbsp; Share
         </button>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
+
+      <div dangerouslySetInnerHTML={{ __html: postContent }}></div>
     </>
   );
 }

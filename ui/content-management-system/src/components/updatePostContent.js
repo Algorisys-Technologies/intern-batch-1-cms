@@ -56,6 +56,31 @@ export default function UpdatePostContent() {
     }
   };
 
+  // Change post method to update
+
+  //   const postHandler = async () => {
+  //     if (summary && imageData)
+  //       try {
+  //         await axios.post("http://localhost:3001/post", {
+  //           user_id: "871ecb13-a972-48da-ac4d-9dc9a0088365",
+  //           blog_id: blogId,
+  //           post_title: title,
+  //           categories: category,
+  //           status: true,
+  //           post_content: editorRef.current.getContent(),
+  //           created_at: "11:00:00+05:30",
+  //           created_by: "Zaki",
+  //           post_image: imageData,
+  //           summary: summary,
+  //         });
+  //       } catch (err) {
+  //         console.log(err.message);
+  //       }
+  //     else {
+  //       alert("Summary and image are required");
+  //     }
+  //   };
+
   //Get Blog name values from database
   useEffect(() => {
     axios

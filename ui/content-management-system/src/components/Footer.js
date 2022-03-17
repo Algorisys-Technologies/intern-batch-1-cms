@@ -3,7 +3,7 @@ import "../styles/footer.css";
 const Footer = () => {
   return (
     <>
-      <div classname="footer-new">
+      <div className="footer-new">
         <div className="footer-content">
           {/* <!--========== FOOTER ==========--> */}
           <footer className="footer section bd-container ">
@@ -85,7 +85,7 @@ const Footer = () => {
               </div>
 
               <div className="footer__content">
-                <h3 className="footer__title">Adress</h3>
+                <h3 className="footer__title">Address</h3>
                 <ul>
                   <li>
                     <a
@@ -94,7 +94,8 @@ const Footer = () => {
                     >
                       {" "}
                       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAU5JREFUSEu1lO1RQkEMRQ8dSAVoBWgFWAJWoB2AnWgHUAF0IFagVoB2oBXIXGaXWfOyXzOSn2/z7sneJDvizDE6sz4tgEtgAdwC16Ggd2AHPAOfpSJrgKcgXtJQzmMuoQRQldNGC5V74+XmAC2VWz3ZtbQfPYA835vEr/CzKlWoFypiYvKubE88gK1e4hL8NmIXgIApZHALD2C9vwO2mV7MgU1yNuiFB/g1YmOn+pji2flH878BP4CsO4UH0ALNkpwei17DQhYBK+A+AWhTNeNek98A2RRjDTzUbqAn4cX0QRDN+Ef4rgXUtKXiOlIhcZSPqblF69niWMvAnhLAu0VmUk+fB9WXADrreS7cZ6IG0HmLVa418V6151ozrbHNvapquuy0E1YcU+t1DlIVb7EowiykSbwHoFxB1HiFdiJrS23RauPYdV5rcpeYl3wAl91AGYDJRKAAAAAASUVORK5CYII=" />
-                      Algorisys Technologies Pvt. Ltd.
+                      <br /> Algorisys Technologies
+                      <br /> Pvt. Ltd.
                     </a>
                   </li>
                 </ul>

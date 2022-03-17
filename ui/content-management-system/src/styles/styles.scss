@@ -416,14 +416,15 @@ img {
     margin: 0.25rem 0 var(--mb-3);
   }
   &__social {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: var(--title-color);
     margin-right: var(--mb-2);
   }
   &__title {
-    font-size: var(--h1-font-size);
+    font-size: var(--h3-font-size);
     color: var(--title-color);
     margin-bottom: var(--mb-2);
+    font-weight: bold;
   }
   &__link {
     display: inline-block;
