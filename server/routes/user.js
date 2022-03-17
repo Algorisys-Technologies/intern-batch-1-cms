@@ -90,7 +90,10 @@ router.post("/login", async (req, res) => {
     // send email verification using node mailer
 
     sendVerificationEmail(requiredurl, req.body.user_email);
-    res.send("An email has been sent for user verification");
+    res.send({
+      status: 400,
+      message: "An email has been sent for user verification",
+    });
   }
 
   if (user.user_email_verified) {
@@ -114,6 +117,29 @@ router.get("/activateuser/:userId", (req, res) => {
     { where: { user_email: decoded_token.user_email } }
   );
   res.status(200).send("Account verified"); // + user.user_name);
+});
+
+//RESET PASSWORD
+router.put(`/ForgotPassword/:user_id`, async (req, res) => {
+  const salt = await bcrypt.genSalt(10);
+  req.body.user_password = await bcrypt.hash(req.body.user_password, salt);
+
+  User.update(
+    { user_password: req.body.user_password },
+    { where: { user_id: req.params.user_id } }
+  )
+    .then((data) => {
+      res.send({
+        message: "Password updated successfully",
+        status: 200,
+      });
+    })
+    .catch((err) => {
+      res.send({
+        message: err.message,
+        status: 500,
+      });
+    });
 });
 
 //DELETE USER

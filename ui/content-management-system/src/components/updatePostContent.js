@@ -6,8 +6,10 @@ import "@pathofdev/react-tag-input/build/index.css";
 import axios from "axios";
 import Loader from "./Loader";
 import { ImagePicker } from "react-file-picker";
-
-export default function App() {
+import "../styles/TextEditor.css";
+// import tinymce from "@tinymce/tinymce-react";
+import tinymce from "react-tinymce";
+export default function UpdatePostContent() {
   const [category, setCategory] = useState("Category");
   const [tag, setTag] = useState([]);
   const [content, setContent] = useState("");
@@ -20,29 +22,41 @@ export default function App() {
   const [blog, setBlog] = useState("Blogs");
   const [blogName, setBlogName] = useState([]);
   const [blogId, setBlogId] = useState(" ");
-  const postHandler = async () => {
-    if (summary && imageData)
-      try {
-        await axios.post("http://localhost:3001/post", {
-          user_id: "ed4bd1ed-d329-492c-abd7-09ca1b143032",
-          blog_id: blogId,
-          post_title: title,
-          categories: category,
-          status: true,
-          post_content: editorRef.current.getContent(),
-          created_at: "11:00:00+05:30",
-          created_by: "Zaki",
-          post_image: imageData,
-          summary: summary,
-        });
-      } catch (err) {
-        console.log(err.message);
+  const [postContent, setPostContent] = useState(" ");
+
+  const queryParams = new URLSearchParams(window.location.search);
+  const post_id = queryParams.get("post_id");
+
+  const updatePost = async (postId) => {
+    try {
+      let Post = await axios.get(`http://localhost:3001/postContent/${postId}`);
+
+      if (Post) {
+        var { post_title, categories, blog_id, post_content } = Post.data;
+        setPostContent(post_content);
+        setTitle(post_title);
+        setCategory(categories);
+        setContent(editorRef.current.setContent(post_content));
+
+        axios
+          .get(`http://localhost:3001/get/blog/${blog_id}`, {
+            blog_id: blog_id,
+          })
+          .then((data) => {
+            setBlog(data.data.blog_title);
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      } else {
+        console.log("No Post found");
       }
-    else {
-      alert("Summary and image are required");
+    } catch (error) {
+      console.log(error);
     }
   };
 
+  //Get Blog name values from database
   useEffect(() => {
     axios
       .get("http://localhost:3001/get/blog")
@@ -109,9 +123,9 @@ export default function App() {
               extensions={["jpg", "jpeg", "png"]}
               dims={{
                 minWidth: "0",
-                maxWidth: "100000",
+                maxWidth: "10000",
                 minHeight: "0",
-                maxHeight: "100000",
+                maxHeight: "10000",
               }}
               onChange={(base64) => {
                 setImageData(base64);
@@ -144,7 +158,7 @@ export default function App() {
                 paddingTop: "10xpx",
                 paddingBottom: "10px",
               }}
-              onClick={postHandler}
+              //onClick={postHandler}
             >
               Post
             </Button>
@@ -157,15 +171,14 @@ export default function App() {
             placeholder="Title"
             className="w-100 text-left"
             onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
 
-          <Dropdown style={{ display: "inline" }} className="ml-2">
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <div className="dropdown">
+            <button className="editor-button" vl>
               {category}
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              {/* Later add categories array below*/}
+            </button>
+            <div className="dropdown-content">
               {[
                 "Personal",
                 "Business/corporate",
@@ -174,38 +187,35 @@ export default function App() {
                 "Food",
               ].map((value) => {
                 return (
-                  <Dropdown.Item
-                    href="#/action-1"
-                    onSelect={() => setCategory(value)}
+                  <button
+                    style={{ border: "none", backgroundColor: "transparent" }}
+                    onClick={() => setCategory(value)}
                   >
                     {value}
-                  </Dropdown.Item>
+                  </button>
                 );
               })}
-            </Dropdown.Menu>
-          </Dropdown>
-          <Dropdown style={{ display: "inline" }} className="ml-2">
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              {blog}
-            </Dropdown.Toggle>
+            </div>
+          </div>
 
-            {/* Later add blogs array below*/}
-
-            <Dropdown.Menu>
+          <div className="dropdown">
+            <button className="editor-button">{blog}</button>
+            <div className="dropdown-content">
               {blogName.map((value) => {
                 return (
-                  <Dropdown.Item
-                    onSelect={() => {
+                  <button
+                    style={{ border: "none", backgroundColor: "transparent" }}
+                    onClick={() => {
                       setBlog(value.blog_title);
                       setBlogId(value.blog_id);
                     }}
                   >
                     {value.blog_title}
-                  </Dropdown.Item>
+                  </button>
                 );
               })}
-            </Dropdown.Menu>
-          </Dropdown>
+            </div>
+          </div>
         </div>
 
         <div>
@@ -250,23 +260,7 @@ export default function App() {
           />
         </div>
         <br />
-        <button
-          style={{
-            borderRadius: "7px",
-            padding: "10px 44px",
-            marginTop: "10px",
-            marginRight: "10px",
-            boxShadow:
-              " 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
-          }}
-          onClick={() => logy("Draft")}
-        >
-          <img
-            src="https://img.icons8.com/external-soft-fill-juicy-fish/20/000000/external-draft-business-process-soft-fill-soft-fill-juicy-fish.png"
-            alt="Draft"
-          />
-          &nbsp; Draft
-        </button>
+
         <button
           style={{
             borderRadius: "7px",
@@ -292,8 +286,9 @@ export default function App() {
             marginRight: "10px",
             marginBottom: "20px",
             boxShadow:
-              " 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
+              "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
           }}
+          onClick={() => updatePost(post_id)}
         >
           <img
             src="https://img.icons8.com/material-outlined/24/000000/share.png"
@@ -301,8 +296,9 @@ export default function App() {
           />
           &nbsp; Share
         </button>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
+
+      {/* <div dangerouslySetInnerHTML={{ __html: postContent }}></div> */}
     </>
   );
 }

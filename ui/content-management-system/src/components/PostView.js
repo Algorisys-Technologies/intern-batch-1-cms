@@ -3,7 +3,7 @@ import "../styles/PostView.css";
 import { Card, Button, ButtonGroup } from "react-bootstrap";
 import axios from "axios";
 import Loader from "./Loader";
-
+import { Link } from "react-router-dom";
 const AddPost = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -65,9 +65,16 @@ const AddPost = () => {
                     <Card.Text>
                       {post.summary.substring(0, 100) + "..."}
                     </Card.Text>
-                    <Button className="readMorebutton" variant="primary">
-                      Read more
-                    </Button>
+                    <Link
+                      to={{
+                        pathname: "/postContent",
+                        search: `post_id=${post.post_id}`,
+                      }}
+                    >
+                      <Button className="readMorebutton" variant="primary">
+                        Read more
+                      </Button>
+                    </Link>
                     <br />
                   </Card.Body>
                   <ButtonGroup aria-label="Basic example">

@@ -32,10 +32,10 @@
 }
 
 .input-login {
-  width: 20pc;
-  height: 3pc;
+  width: 20pc !important;
+  height: 3pc !important;
   margin: auto;
-  border-radius: 40px;
+  border-radius: 40px !important;
   text-align: center;
   font-weight: 500;
   font-family: sans-serif, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";

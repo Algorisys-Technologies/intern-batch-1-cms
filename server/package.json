@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": " cd ../ui/content-management-system/ && yarn start",
+    "dev": "concurrently \"yarn start\" \"yarn client\""
   },
   "author": "algorisys",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "concurrently": "^7.0.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^14.3.2",

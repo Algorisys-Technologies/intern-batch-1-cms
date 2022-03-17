@@ -68,7 +68,7 @@ export default function SignUp() {
     });
   };
   return (
-    <div>
+    <div className="mb-5">
       <Form className="layout-set-signup">
         <br />
         <Form.Group controlId="formBasicName">

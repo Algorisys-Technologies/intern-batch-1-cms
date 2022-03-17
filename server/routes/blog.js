@@ -8,6 +8,12 @@ router.get("/get/blog", async (req, res) => {
   res.status(200).send(blog);
 });
 
+//Get Blog Name by ID
+router.get("/get/blog/:id", async (req, res) => {
+  const blog = await Blog.findOne({ where: { blog_id: req.params.id } });
+  res.status(200).send(blog);
+});
+
 //CREATE A NEW BLOG
 router.post("/create/blog", async (req, res) => {
   const blog = Blog.create({

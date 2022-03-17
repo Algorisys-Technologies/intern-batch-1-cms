@@ -11,8 +11,8 @@ import Dashboard from "./components/Dashboard";
 import Draft from "./components/Draft";
 import Blog from "./components/Blog";
 import CreateBlog from "./components/CreateBlog";
-// import Avatar from "react-avatar";
-import { useEffect } from "react";
+import Post from "./components/Post";
+import UpdatePostContent from "./components/updatePostContent";
 
 function App() {
   return (
@@ -44,12 +44,18 @@ function App() {
           <Route exact path="/createblog">
             <CreateBlog />
           </Route>
+          <Route exact path="/postContent">
+            <Post />
+          </Route>
           <Route exact path="/login">
             <Login />
           </Route>
+          <Route exact path="/updatepost">
+            <UpdatePostContent />
+          </Route>
         </Switch>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }

@@ -56,7 +56,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="mb-5">
       <Form className="layout-set-login">
         <br />
         <Form.Group controlId="formBasicEmail">

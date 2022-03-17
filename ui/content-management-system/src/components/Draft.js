@@ -14,22 +14,19 @@ export default function Draft() {
       .get("http://localhost:3001/getPost")
       .then((Post) => {
         setDrafts(Post.data);
-        console.log(Post.data);
+        // console.log(Post.data);
       })
       .catch((err) => {
         console.log(err.message);
       });
   }, []);
+
+  var regex = /( |<([^>]+)>)/gi;
   return (
     <ul
+      className="m-0 justify-content-center d-flex flex-row align-items-center flex-wrap"
       style={{
         textDecoration: "none",
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        alignItems: "center",
-        margin: "0",
         padding: "1rem",
       }}
     >
@@ -37,7 +34,7 @@ export default function Draft() {
         if (!post.status)
           return (
             <>
-              <li style={{ display: "inline" }}>
+              <li className="d-inline">
                 <Card
                   style={{
                     width: "22rem",
@@ -53,7 +50,12 @@ export default function Draft() {
                   />
                   <Card.Body style={{ display: "inline" }}>
                     <Card.Title>{post.post_title}</Card.Title>
-                    <Card.Text>{post.post_content.substr(0, 350)}</Card.Text>
+                    <Card.Text style={{ textAlign: "justify" }}>
+                      {post.post_content
+                        .replace(regex, " ")
+                        .replace("&nbsp", "")
+                        .substring(0, 310) + "..."}
+                    </Card.Text>
                     <Button className="readMorebutton" variant="primary">
                       Read more
                     </Button>
@@ -84,7 +86,6 @@ export default function Draft() {
                     </Button>
                   </ButtonGroup>
                 </Card>
-                ;
               </li>
             </>
           );

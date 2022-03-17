@@ -2,6 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 export default function Blog() {
+  var dummyText = `Lorem Ipsum has been the industry's standard dummy text ever
+  since the 1500s, when an unknown printer took a galley of type
+  and scrambled it to make a type specimen book. It has survived
+  not only five centuries, but also the leap into electronic
+  typesetting, remaining essentially unchanged. It was
+  popularised in the 1960s with the release of Letraset sheets
+  containing Lorem Ipsum passages, and more recently with
+  desktop publishing software like Aldus PageMaker including
+  versions of Lorem Ipsum`;
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
     axios
@@ -21,40 +30,57 @@ export default function Blog() {
         {blogs.map((blog) => {
           return (
             <div
-              className="blogs py-1 w-75 d-flex justify-content-between flex-wrap align-items-center"
+              className="blogs py-1 w-75 d-flex"
               style={{
                 marginTop: "30px",
                 borderRadius: "25px",
                 paddingLeft: "30px",
                 paddingRight: "30px",
-                border: "1px dashed black",
                 backgroundColor: "#fbfefd",
+                backgroundImage:
+                  "linear-gradient(to right, rgba(255, 0, 0, 0), rgb(228 228 228 / 58%))",
               }}
             >
               <img
+                className="mt-2 mb-2"
                 style={{
-                  width: "90px",
-                  height: "90px",
+                  width: "120px",
+                  height: "120px",
                   borderRadius: "30px",
-                  border: "1px solid black",
+                  objectFit: "cover",
+                  boxShadow: "rgb(206 206 209) 5px 9px 26px -8px",
                 }}
                 src={blog.blog_image}
                 alt=""
               />
-              <p style={{ fontSize: "1.1rem" }} className="text-muted m-0">
-                {blog.blog_title}
-              </p>
-              <br />
 
-              <p
-                style={{
-                  fontSize: "1.1rem",
-                  zIndex: "3",
-                }}
-                className="text-muted text-justify"
-              >
-                6post
-              </p>
+              <div className="d-flex w-100 flex-column">
+                <div className="d-flex justify-content-between flex-row">
+                  <p
+                    style={{ fontSize: "1.1rem" }}
+                    className="p-2 text-muted ml-4"
+                  >
+                    {blog.blog_title}
+                  </p>
+                  {/* <p
+                    style={{ fontSize: "1.1rem" }}
+                    className="p-2 text-muted ml-4"
+                  >
+                    12 March 2022
+                  </p> */}
+                  <p
+                    style={{
+                      fontSize: "1.1rem",
+                    }}
+                    className="text-muted text-justify p-2 mr-4"
+                  >
+                    Author Murtuza
+                  </p>
+                </div>
+                <div className="ml-4 p-2 text-justify">
+                  {dummyText.substring(0, 290) + "..."}
+                </div>
+              </div>
             </div>
           );
         })}
