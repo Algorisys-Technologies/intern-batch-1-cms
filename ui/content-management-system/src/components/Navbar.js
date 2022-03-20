@@ -26,7 +26,6 @@ const NavigationBar = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("UseEffect");
     const userLoggedIn = localStorage.getItem("user_name");
     if (userLoggedIn != null) {
       setShow(false);

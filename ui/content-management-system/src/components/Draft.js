@@ -4,7 +4,7 @@ import { Card, Button, ButtonGroup } from "react-bootstrap";
 import axios from "axios";
 import { Editor, get, getContent } from "@tinymce/tinymce-react";
 import TinyMCE from "react-tinymce";
-
+import { Link } from "react-router-dom";
 import "@pathofdev/react-tag-input/build/index.css";
 
 export default function Draft() {
@@ -24,7 +24,7 @@ export default function Draft() {
   var regex = /( |<([^>]+)>)/gi;
   return (
     <ul
-      className="m-0 justify-content-center d-flex flex-row align-items-center flex-wrap"
+      className="m-0 justify-content-center flex-wrap flex-row align-items-center d-flex"
       style={{
         textDecoration: "none",
         padding: "1rem",
@@ -34,57 +34,53 @@ export default function Draft() {
         if (!post.status)
           return (
             <>
-              <li className="d-inline">
+              <li style={{ display: "inline" }}>
                 <Card
                   style={{
-                    width: "22rem",
-                    height: "38rem",
+                    width: "19rem",
+                    height: "29rem",
                     margin: "30px 30px",
+                    borderRadius: "40px",
+                    boxShadow: "rgb(206 206 209) 5px 9px 26px -8px",
+                    backgroundColor: "#fbfefd",
+                    border: "none",
                   }}
                   key={post.post_id}
+                  className="postCard"
                 >
                   <Card.Img
                     variant="top"
-                    style={{ width: "22rem", height: "15rem" }}
+                    style={{
+                      width: "19rem",
+
+                      height: "12rem",
+                    }}
+                    className="mt-3"
                     src={post.post_image}
                   />
-                  <Card.Body style={{ display: "inline" }}>
-                    <Card.Title>{post.post_title}</Card.Title>
-                    <Card.Text style={{ textAlign: "justify" }}>
-                      {post.post_content
-                        .replace(regex, " ")
-                        .replace("&nbsp", "")
-                        .substring(0, 310) + "..."}
+                  <Card.Body className="d-inline">
+                    <Card.Title style={{ fontSize: "25px" }}>
+                      {post.post_title}
+                    </Card.Title>
+                    <Card.Text>
+                      {post.summary.substring(0, 100) + "..."}
                     </Card.Text>
-                    <Button className="readMorebutton" variant="primary">
-                      Read more
-                    </Button>
+                    <Link
+                      to={{
+                        pathname: "/updatepost",
+                        search: `post_id=${post.post_id}`,
+                      }}
+                    >
+                      <Button
+                        style={{ bottom: "30px", left: "110px" }}
+                        className="readMorebutton"
+                        variant="primary"
+                      >
+                        Edit Post
+                      </Button>
+                    </Link>
                     <br />
                   </Card.Body>
-                  <ButtonGroup aria-label="Basic example">
-                    <Button
-                      style={{
-                        width: "120px",
-                        backgroundColor: "transparent",
-                        border: "1px solid black",
-                        color: "black",
-                        width: "50%",
-                      }}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      style={{
-                        width: "120px",
-                        backgroundColor: "transparent",
-                        border: "1px solid black",
-                        color: "black",
-                        width: "50%",
-                      }}
-                    >
-                      Publish
-                    </Button>
-                  </ButtonGroup>
                 </Card>
               </li>
             </>
