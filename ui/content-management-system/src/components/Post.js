@@ -8,11 +8,12 @@ export default function PostRender() {
   const [content, setContent] = useState();
   const queryParams = new URLSearchParams(window.location.search);
   const post_id = queryParams.get("post_id");
-  console.log(post_id);
+  //console.log(post_id);
   const postData = axios
     .get(`http://localhost:3001/postContent/${post_id}`)
     .then((data) => {
-      setContent(data.data.post_content);
+      console.log(data.data[0].post_content);
+      setContent(data.data[0].post_content);
     })
     .catch((e) => {
       console.log(e.message);

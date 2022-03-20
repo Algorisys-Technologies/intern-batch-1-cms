@@ -8,8 +8,10 @@ const AddPost = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const blog_id = queryParams.get("blog_id");
     axios
-      .get("http://localhost:3001/getPost")
+      .get(`http://localhost:3001/viewpost/${blog_id}`)
       .then((Post) => {
         setPosts(Post.data);
         console.log(Post.data);

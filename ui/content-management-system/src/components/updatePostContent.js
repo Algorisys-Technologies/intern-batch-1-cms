@@ -3,6 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Button, Dropdown, Modal } from "react-bootstrap";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Loader from "./Loader";
 import { ImagePicker } from "react-file-picker";
@@ -10,33 +11,31 @@ import "../styles/TextEditor.css";
 // import tinymce from "@tinymce/tinymce-react";
 import tinymce from "react-tinymce";
 export default function UpdatePostContent() {
+  const history = useHistory();
   const [category, setCategory] = useState("Category");
   const [tag, setTag] = useState([]);
-  const [content, setContent] = useState("");
+  const [postContent, setpostContent] = useState("");
   const [title, setTitle] = useState("");
   const editorRef = useRef(null);
-  const [show, setShow] = useState(false);
-  const [imageData, setImageData] = useState("");
-  const [summary, setSummary] = useState("");
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState("Blogs");
   const [blogName, setBlogName] = useState([]);
   const [blogId, setBlogId] = useState(" ");
-  const [postContent, setPostContent] = useState(" ");
 
   const queryParams = new URLSearchParams(window.location.search);
-  const post_id = queryParams.get("post_id");
-
-  const updatePost = async (postId) => {
+  var post_id = queryParams.get("post_id");
+  const updatePost = async () => {
+    // console.log("Update Called");
     try {
-      let Post = await axios.get(`http://localhost:3001/postContent/${postId}`);
-
+      var Post = await axios.get(
+        `http://localhost:3001/postContent/${post_id}`
+      );
+      //console.log(Post);
       if (Post) {
-        var { post_title, categories, blog_id, post_content } = Post.data;
-        setPostContent(post_content);
+        var { post_title, categories, blog_id, post_content } = Post.data[0];
         setTitle(post_title);
         setCategory(categories);
-        setContent(editorRef.current.setContent(post_content));
+        setpostContent(editorRef.current.setContent(post_content));
 
         axios
           .get(`http://localhost:3001/get/blog/${blog_id}`, {
@@ -57,29 +56,35 @@ export default function UpdatePostContent() {
   };
 
   // Change post method to update
+  const postPublishHandler = async () => {
+    try {
+      let updateResponse = await axios.put(
+        "http://localhost:3001/updatePostData",
+        {
+          post_id: post_id,
+          post_title: title,
+          categories: category,
+          post_content: editorRef.current.getContent(),
+          blog_id: blogId,
+        }
+      );
 
-  //   const postHandler = async () => {
-  //     if (summary && imageData)
-  //       try {
-  //         await axios.post("http://localhost:3001/post", {
-  //           user_id: "871ecb13-a972-48da-ac4d-9dc9a0088365",
-  //           blog_id: blogId,
-  //           post_title: title,
-  //           categories: category,
-  //           status: true,
-  //           post_content: editorRef.current.getContent(),
-  //           created_at: "11:00:00+05:30",
-  //           created_by: "Zaki",
-  //           post_image: imageData,
-  //           summary: summary,
-  //         });
-  //       } catch (err) {
-  //         console.log(err.message);
-  //       }
-  //     else {
-  //       alert("Summary and image are required");
-  //     }
-  //   };
+      if (updateResponse.status == 200) {
+        history.push(`/postContent?post_id=${post_id}`);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  //Get Blog name values from database
+  useEffect(() => {
+    setTimeout(() => {
+      updatePost();
+    }, 600);
+
+    console.log("Called");
+  }, []);
 
   //Get Blog name values from database
   useEffect(() => {
@@ -93,102 +98,10 @@ export default function UpdatePostContent() {
       });
   }, []);
 
-  const handleChange = (post_summary) => {
-    setSummary(post_summary);
-  };
-
-  const handleCloseModal = () => setShow(false);
-  const handlePostModal = () => setShow(true);
-
-  const logy = async (type) => {
-    if (editorRef.current) {
-      setContent(editorRef.current.getContent());
-    }
-
-    if (type === "Draft") {
-      try {
-        await axios.post("http://localhost:3001/post", {
-          user_id: "871ecb13-a972-48da-ac4d-9dc9a0088365",
-          post_title: title,
-          categories: category,
-          status: false,
-          post_content: editorRef.current.getContent(),
-          created_at: "11:00:00+05:30",
-          created_by: "Zaki",
-        });
-      } catch (err) {
-        console.log(err.message);
-      }
-    } else if (type === "Post") {
-      handlePostModal();
-    }
-  };
-
   return (
     <>
       <div className="container">
         <h1>New Post</h1>
-
-        <Modal show={show} onHide={handleCloseModal} animation={false}>
-          <Modal.Header closeButton>
-            <Modal.Title>Please provide the following details</Modal.Title>
-          </Modal.Header>
-          <label style={{ position: "relative", top: "20px", left: "15px" }}>
-            Post summary
-          </label>
-          <Modal.Body>
-            {/* <input type="textarea" rows="4" cols="50" style={{ width: "100%" }} /> */}
-            <textarea
-              rows="6"
-              cols="48"
-              onChange={(e) => handleChange(e.target.value, "summary")}
-              placeholder="Please Write a short attractive summary (60 + words), it increases the chance of user opening your blog."
-            ></textarea>
-            <ImagePicker
-              extensions={["jpg", "jpeg", "png"]}
-              dims={{
-                minWidth: "0",
-                maxWidth: "10000",
-                minHeight: "0",
-                maxHeight: "10000",
-              }}
-              onChange={(base64) => {
-                setImageData(base64);
-              }}
-              onError={(errMsg) => console.log(errMsg)}
-            >
-              <button
-                style={{
-                  marginLeft: "135px",
-                  marginTop: "20px",
-                  padding: "3px 20px",
-                  borderRadius: "6px",
-                }}
-              >
-                Select post image
-              </button>
-            </ImagePicker>
-
-            <img style={{ width: "100%" }} src={imageData} alt="Post card" />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="primary"
-              // onClick={handleCloseModal}
-              style={{
-                position: "relative",
-                right: "180px",
-                paddingLeft: "50px",
-                paddingRight: "50px",
-                paddingTop: "10xpx",
-                paddingBottom: "10px",
-              }}
-              //onClick={postHandler}
-            >
-              Post
-            </Button>
-          </Modal.Footer>
-        </Modal>
 
         <div className="d-flex justify-content-between">
           <input
@@ -200,7 +113,7 @@ export default function UpdatePostContent() {
           />
 
           <div className="dropdown">
-            <button className="editor-button" vl>
+            <button className="editor-button" value={category}>
               {category}
             </button>
             <div className="dropdown-content">
@@ -224,7 +137,9 @@ export default function UpdatePostContent() {
           </div>
 
           <div className="dropdown">
-            <button className="editor-button">{blog}</button>
+            <button className="editor-button" value={blog}>
+              {blog}
+            </button>
             <div className="dropdown-content">
               {blogName.map((value) => {
                 return (
@@ -295,13 +210,13 @@ export default function UpdatePostContent() {
             boxShadow:
               " 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
           }}
-          onClick={() => logy("Post")}
+          onClick={() => postPublishHandler()}
         >
           <img
             src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/25/000000/external-share-post-blogger-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png"
             alt="Post"
           />
-          &nbsp; Post
+          &nbsp; Publish
         </button>
         <button
           style={{

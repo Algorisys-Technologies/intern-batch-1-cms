@@ -27,12 +27,26 @@ router.get("/getUserPost", async (req, res) => {
 
 //GET POST BY POST ID
 router.get("/postContent/:post_id", async (req, res) => {
-  const post = await Post.findOne({
+  const post = await Post.findAll({
     where: {
       post_id: req.params.post_id,
     },
   });
   if (!(post.length == 0)) {
+    res.send(post);
+  } else {
+    res.send("Post does not exist for the given user");
+  }
+});
+
+//GET POST BY Blog ID
+router.get(`/viewpost/:blog_id`, async (req, res) => {
+  const post = await Post.findAll({
+    where: {
+      blog_id: req.params.blog_id,
+    },
+  });
+  if (post) {
     res.send(post);
   } else {
     res.send("Post does not exist for the given user");
@@ -54,7 +68,7 @@ router.post("/post", async (req, res) => {
     post_image: req.body.post_image,
   })
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       res.send({
         status: "success",
         message: "Post saved successfully",
@@ -69,12 +83,33 @@ router.post("/post", async (req, res) => {
 });
 
 //UPDATE POST
-router.put("/updatePost", async (req, res) => {
-  const post = await Post.findOne({
-    where: {
-      post_id: req.body.post_id,
+router.put("/updatePostData", async (req, res) => {
+  Post.update(
+    {
+      post_title: req.body.post_title,
+      categories: req.body.categories,
+      post_content: req.body.post_content,
+      blog_id: req.body.blog_id,
     },
-  });
+    {
+      where: {
+        post_id: req.body.post_id,
+      },
+    }
+  )
+    .then((data) => {
+      res.send({
+        status: 200,
+        message: "Post saved successfully",
+        data: data,
+      });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        status: "failure",
+        message: err.message,
+      });
+    });
 });
 
 //DELETE POST BY POST ID

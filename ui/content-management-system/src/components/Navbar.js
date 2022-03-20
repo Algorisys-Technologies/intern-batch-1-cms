@@ -59,12 +59,7 @@ const NavigationBar = () => {
                 <Link to="/dashboard"> Dashboard</Link>
               </Nav.Link>
             )}
-            {/* <Nav.Link className="navbarLink" href="#action1">
-              <Link to="/">Home</Link>
-            </Nav.Link> */}
-            <Nav.Link className="navbarLink" href="#action2">
-              <Link to="/viewpost">Posts</Link>
-            </Nav.Link>
+
             <Nav.Link className="navbarLink" href="#action2">
               <Link style={{ fontWeight: "bold" }} to="/blog">
                 Blogs
@@ -104,12 +99,6 @@ const NavigationBar = () => {
                 <NavDropdown.Divider />
               </NavDropdown>
             )}
-            {/* <Nav.Link className="navbarLink" href="#action6">
-              Notifications
-            </Nav.Link> */}
-            {/* <Nav.Link className="navbarLink" href="#action7">
-              Settings
-            </Nav.Link> */}
           </Nav>
           {/* <Form className="d-flex navbarLink">
             <FormControl

@@ -63,7 +63,7 @@ function App() {
           </Route>
           <Route exact path="/updatepost">
             <UpdatePostContent />
-            <Route/>
+          </Route>
           <Route path="/ForgotPassword">
             <ForgotPassword />
           </Route>
