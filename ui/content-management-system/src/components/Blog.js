@@ -45,6 +45,7 @@ export default function Blog() {
                   backgroundColor: "#fbfefd",
                   backgroundImage:
                     "linear-gradient(to right, rgba(255, 0, 0, 0), rgb(228 228 228 / 58%))",
+                  boxShadow: "rgb(206 206 209) 5px 9px 26px -8px",
                 }}
               >
                 <img
@@ -83,7 +84,7 @@ export default function Blog() {
                     </p>
                   </div>
                   <div className="ml-4 p-2 text-justify">
-                    {dummyText.substring(0, 290) + "..."}
+                    {blog.summary.substring(0, 250) + "..."}
                   </div>
                 </div>
               </div>
