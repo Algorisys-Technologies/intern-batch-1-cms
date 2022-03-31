@@ -25,15 +25,6 @@ export default function PostRender() {
       console.log(e.message);
     });
 
-  // axios
-  //   .get(`http://localhost:3001/getusername/${userId}`)
-  //   .then((data) => {
-  //     console.log(data);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-
   return (
     <div className="post-wrapper">
       <div className="post-header">

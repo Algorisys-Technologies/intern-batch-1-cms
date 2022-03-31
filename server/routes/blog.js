@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express();
 const Blog = require("../models/blog");
+const Post = require("../models/post");
 
 //GET ALL BLOGS
 router.get("/get/blog", async (req, res) => {
@@ -37,6 +38,40 @@ router.post("/create/blog", async (req, res) => {
         message: err.message,
       });
     });
+});
+
+//Delete Blog by Blog Id
+router.delete("/delblog/:blog_id", async (req, res) => {
+  const blog = await Post.findAll({
+    where: {
+      blog_id: req.params.blog_id,
+    },
+  });
+  if (blog) {
+    try {
+      await Post.destroy({
+        where: {
+          blog_id: req.params.blog_id,
+        },
+      });
+      await Blog.destroy({
+        where: {
+          blog_id: req.params.blog_id,
+        },
+      });
+      res.send({
+        status: 200,
+        message: "Blog deleted successfully",
+      });
+    } catch (err) {
+      res.send({
+        status: 500,
+        message: err.message,
+      });
+    }
+  } else {
+    res.send("Blog does not exist");
+  }
 });
 
 module.exports = router;
