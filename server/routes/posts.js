@@ -1,10 +1,8 @@
 const express = require("express");
 const req = require("express/lib/request");
 const res = require("express/lib/response");
-const router = express();
-const { Sequelize } = require("sequelize");
 const Post = require("../models/post");
-
+const router = express();
 //GET ALL POST
 router.get("/getPost", async (req, res) => {
   const post = await Post.findAll();
@@ -12,18 +10,17 @@ router.get("/getPost", async (req, res) => {
 });
 
 //GET POST BY USER ID
-router.get("/getUserPost", async (req, res) => {
-  const post = await Post.findAll({
-    where: {
-      user_id: req.body.user_id,
-    },
-  });
-  if (!(post.length == 0)) {
-    res.send(post);
-  } else {
-    res.send("Post does not exist for the given user");
-  }
-});
+// router.get("/getuserPost", async (req, res) => {
+//   //console.log(req.body);
+
+//   const post = await Post.findAll({ where: { user_id: req.body.user_id } });
+//   // if (post) {
+//   //   res.send(post);
+//   // } else {
+//   //   res.send("Post does not exist for the given user");
+//   // }
+//   res.status(200).send(post);
+// });
 
 //GET POST BY POST ID
 router.get("/postContent/:post_id", async (req, res) => {
@@ -90,6 +87,7 @@ router.put("/updatePostData", async (req, res) => {
       categories: req.body.categories,
       post_content: req.body.post_content,
       blog_id: req.body.blog_id,
+      status: req.body.status,
     },
     {
       where: {
@@ -107,17 +105,17 @@ router.put("/updatePostData", async (req, res) => {
     .catch((err) => {
       res.status(500).send({
         status: "failure",
-        message: err.message,
+        message: err,
       });
     });
 });
 
 //DELETE POST BY POST ID
-router.delete("/delPost", async (req, res) => {
-  const { post_id } = await req.body;
+router.delete("/delpost/:post_id", async (req, res) => {
+  //const { post_id } = await req.body;
   const post = await Post.findOne({
     where: {
-      post_id: post_id,
+      post_id: req.params.post_id,
     },
   });
   //console.log(post);
@@ -125,7 +123,7 @@ router.delete("/delPost", async (req, res) => {
     try {
       await Post.destroy({
         where: {
-          post_id: post_id,
+          post_id: req.params.post_id,
         },
       });
       res.send("Post deleted successfully");

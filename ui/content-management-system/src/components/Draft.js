@@ -7,6 +7,8 @@ import TinyMCE from "react-tinymce";
 import { Link } from "react-router-dom";
 import "@pathofdev/react-tag-input/build/index.css";
 
+var dummyText =
+  " lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000lorem1000";
 export default function Draft() {
   const [drafts, setDrafts] = useState([]);
   useEffect(() => {

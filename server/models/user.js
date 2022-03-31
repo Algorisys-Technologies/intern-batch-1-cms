@@ -11,11 +11,6 @@ const sequelize = new Sequelize(
   }
 );
 
-// const sequelize = new Sequelize("cms_database", "postgres", "mzaki2599", {
-//   host: "localhost",
-//   dialect: "postgres",
-// });
-
 const User = sequelize.define(
   "user",
   {

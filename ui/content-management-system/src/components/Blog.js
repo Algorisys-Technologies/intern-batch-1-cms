@@ -13,6 +13,8 @@ export default function Blog() {
   desktop publishing software like Aldus PageMaker including
   versions of Lorem Ipsum`;
   const [blogs, setBlogs] = useState([]);
+  var user_id = localStorage.getItem("user_id");
+
   useEffect(() => {
     axios
       .get("http://localhost:3001/get/blog")

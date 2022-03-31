@@ -40,6 +40,9 @@ const NavigationBar = () => {
     window.location.reload();
   };
 
+  const handlePost = () => {
+    history.push("/myposts");
+  };
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -53,12 +56,6 @@ const NavigationBar = () => {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav style={{ maxHeight: "80px" }} navbarScroll>
-            {!show && (
-              <Nav.Link className="navbarLink" href="#action1">
-                <Link to="/dashboard"> Dashboard</Link>
-              </Nav.Link>
-            )}
-
             <Nav.Link className="navbarLink" href="#action2">
               <Link style={{ fontWeight: "bold" }} to="/blog">
                 Blogs
@@ -94,7 +91,7 @@ const NavigationBar = () => {
                 <NavDropdown.Item>
                   <Link to="/createblog">New Blog</Link>
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action4">Edit blogs</NavDropdown.Item>
+                <NavDropdown.Item href="#action4">My blogs</NavDropdown.Item>
                 <NavDropdown.Divider />
               </NavDropdown>
             )}
@@ -143,6 +140,18 @@ const NavigationBar = () => {
                 }}
               >
                 Log out
+              </button>
+              <button
+                onClick={() => {
+                  handlePost();
+                }}
+                style={{
+                  border: "none",
+                  backgroundColor: "transparent",
+                  marginLeft: "30px",
+                }}
+              >
+                Posts
               </button>
             </div>
           </p>

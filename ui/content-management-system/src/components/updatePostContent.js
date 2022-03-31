@@ -8,7 +8,6 @@ import axios from "axios";
 import Loader from "./Loader";
 import { ImagePicker } from "react-file-picker";
 import "../styles/TextEditor.css";
-// import tinymce from "@tinymce/tinymce-react";
 import tinymce from "react-tinymce";
 export default function UpdatePostContent() {
   const history = useHistory();
@@ -16,7 +15,7 @@ export default function UpdatePostContent() {
   const [tag, setTag] = useState([]);
   const [postContent, setpostContent] = useState("");
   const [title, setTitle] = useState("");
-  const editorRef = useRef(null);
+  const editorRef = useRef();
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState("Blogs");
   const [blogName, setBlogName] = useState([]);
@@ -35,14 +34,18 @@ export default function UpdatePostContent() {
         var { post_title, categories, blog_id, post_content } = Post.data[0];
         setTitle(post_title);
         setCategory(categories);
-        setpostContent(editorRef.current.setContent(post_content));
+        setTimeout(() => {
+          setpostContent(editorRef.current.setContent(post_content));
+        }, 100);
 
+        // setBlogId(blog_id);
         axios
           .get(`http://localhost:3001/get/blog/${blog_id}`, {
             blog_id: blog_id,
           })
           .then((data) => {
             setBlog(data.data.blog_title);
+            setBlogId(blog_id);
           })
           .catch((err) => {
             console.log(err.message);
@@ -66,9 +69,10 @@ export default function UpdatePostContent() {
           categories: category,
           post_content: editorRef.current.getContent(),
           blog_id: blogId,
+          status: true,
         }
       );
-
+      console.log("updateResponse", updateResponse);
       if (updateResponse.status == 200) {
         history.push(`/postContent?post_id=${post_id}`);
       }
@@ -81,13 +85,13 @@ export default function UpdatePostContent() {
   useEffect(() => {
     setTimeout(() => {
       updatePost();
-    }, 600);
+    }, 2000);
 
     console.log("Called");
-  }, []);
+    // }, []);
 
-  //Get Blog name values from database
-  useEffect(() => {
+    // //Get Blog name values from database
+    // useEffect(() => {
     axios
       .get("http://localhost:3001/get/blog")
       .then((Blog) => {
@@ -98,6 +102,7 @@ export default function UpdatePostContent() {
       });
   }, []);
 
+  var user_id = localStorage.getItem("user_id");
   return (
     <>
       <div className="container">
@@ -142,17 +147,19 @@ export default function UpdatePostContent() {
             </button>
             <div className="dropdown-content">
               {blogName.map((value) => {
-                return (
-                  <button
-                    style={{ border: "none", backgroundColor: "transparent" }}
-                    onClick={() => {
-                      setBlog(value.blog_title);
-                      setBlogId(value.blog_id);
-                    }}
-                  >
-                    {value.blog_title}
-                  </button>
-                );
+                if (value.user_id == user_id) {
+                  return (
+                    <button
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                      onClick={() => {
+                        setBlog(value.blog_title);
+                        setBlogId(value.blog_id);
+                      }}
+                    >
+                      {value.blog_title}
+                    </button>
+                  );
+                }
               })}
             </div>
           </div>
@@ -228,7 +235,6 @@ export default function UpdatePostContent() {
             boxShadow:
               "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
           }}
-          onClick={() => updatePost(post_id)}
         >
           <img
             src="https://img.icons8.com/material-outlined/24/000000/share.png"

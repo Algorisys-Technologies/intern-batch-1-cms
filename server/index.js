@@ -19,6 +19,7 @@ app.use(postRoutes);
 app.use(userRoutes);
 app.use(blogRoutes);
 app.use(TagRoutes);
+app.use(express.json({ limit: "50mb" }));
 
 app.listen(3001, () => {
   console.log("Listening on Port: 3001");

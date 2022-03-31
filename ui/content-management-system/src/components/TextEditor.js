@@ -25,15 +25,16 @@ export default function TextEditor() {
   const [blogId, setBlogId] = useState(" ");
   const [postContent, setPostContent] = useState(" ");
 
-  const postHandler = async () => {
-    if (summary && imageData)
+  var user_id = localStorage.getItem("user_id");
+  const postHandler = async (actionType) => {
+    if (summary && imageData) {
       try {
         await axios.post("http://localhost:3001/post", {
-          user_id: "ed4bd1ed-d329-492c-abd7-09ca1b143032",
+          user_id: user_id,
           blog_id: blogId,
           post_title: title,
           categories: category,
-          status: true,
+          status: actionType,
           post_content: editorRef.current.getContent(),
           created_at: "11:00:00+05:30",
           created_by: "Zaki",
@@ -43,7 +44,7 @@ export default function TextEditor() {
       } catch (err) {
         console.log(err.message);
       }
-    else {
+    } else {
       alert("Summary and image are required");
     }
   };
@@ -67,29 +68,11 @@ export default function TextEditor() {
   const handleCloseModal = () => setShow(false);
   const handlePostModal = () => setShow(true);
 
-  const logy = async (type) => {
+  const logy = async () => {
     if (editorRef.current) {
       setContent(editorRef.current.getContent());
     }
-
-    if (type === "Draft") {
-      try {
-        await axios.post("http://localhost:3001/post", {
-          user_id: "871ecb13-a972-48da-ac4d-9dc9a0088365",
-          post_title: title,
-          blog_id: blogId,
-          categories: category,
-          status: false,
-          post_content: editorRef.current.getContent(),
-          created_at: "11:00:00+05:30",
-          created_by: "Zaki",
-        });
-      } catch (err) {
-        console.log(err.message);
-      }
-    } else if (type === "Post") {
-      handlePostModal();
-    }
+    handlePostModal();
   };
 
   return (
@@ -116,9 +99,9 @@ export default function TextEditor() {
               extensions={["jpg", "jpeg", "png"]}
               dims={{
                 minWidth: "0",
-                maxWidth: "100000",
+                maxWidth: "5000",
                 minHeight: "0",
-                maxHeight: "100000",
+                maxHeight: "5000",
               }}
               onChange={(base64) => {
                 setImageData(base64);
@@ -145,15 +128,40 @@ export default function TextEditor() {
               // onClick={handleCloseModal}
               style={{
                 position: "relative",
-                right: "180px",
+                right: "100px",
                 paddingLeft: "50px",
                 paddingRight: "50px",
                 paddingTop: "10xpx",
                 paddingBottom: "10px",
               }}
-              onClick={postHandler}
+              onClick={() => postHandler(true)}
             >
+              <img
+                className="mr-2"
+                src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/25/000000/external-share-post-blogger-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png"
+                alt="Post"
+              />
               Post
+            </Button>
+            <Button
+              variant="primary"
+              // onClick={handleCloseModal}
+              style={{
+                position: "relative",
+                right: "60px",
+                paddingLeft: "50px",
+                paddingRight: "50px",
+                paddingTop: "10xpx",
+                paddingBottom: "10px",
+              }}
+              onClick={() => postHandler(false)}
+            >
+              <img
+                className="mr-2"
+                src="https://img.icons8.com/external-soft-fill-juicy-fish/20/000000/external-draft-business-process-soft-fill-soft-fill-juicy-fish.png"
+                alt="Draft"
+              />
+              Draft
             </Button>
           </Modal.Footer>
         </Modal>
@@ -198,17 +206,19 @@ export default function TextEditor() {
             <button className="editor-button">{blog}</button>
             <div className="dropdown-content">
               {blogName.map((value) => {
-                return (
-                  <button
-                    style={{ border: "none", backgroundColor: "transparent" }}
-                    onClick={async () => {
-                      await setBlog(value.blog_title);
-                      await setBlogId(value.blog_id);
-                    }}
-                  >
-                    {value.blog_title}
-                  </button>
-                );
+                if (value.user_id == user_id) {
+                  return (
+                    <button
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                      onClick={async () => {
+                        await setBlog(value.blog_title);
+                        await setBlogId(value.blog_id);
+                      }}
+                    >
+                      {value.blog_title}
+                    </button>
+                  );
+                }
               })}
             </div>
           </div>
@@ -256,7 +266,7 @@ export default function TextEditor() {
           />
         </div>
         <br />
-        <button
+        {/* <button
           style={{
             borderRadius: "7px",
             padding: "10px 44px",
@@ -265,14 +275,14 @@ export default function TextEditor() {
             boxShadow:
               " 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
           }}
-          onClick={() => logy("Draft")}
+          onClick={logy}
         >
           <img
             src="https://img.icons8.com/external-soft-fill-juicy-fish/20/000000/external-draft-business-process-soft-fill-soft-fill-juicy-fish.png"
             alt="Draft"
           />
           &nbsp; Draft
-        </button>
+        </button> */}
         <button
           style={{
             borderRadius: "7px",
@@ -282,15 +292,15 @@ export default function TextEditor() {
             boxShadow:
               " 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
           }}
-          onClick={() => logy("Post")}
+          onClick={logy}
         >
-          <img
+          {/* <img
             src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/25/000000/external-share-post-blogger-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png"
             alt="Post"
-          />
-          &nbsp; Post
+          /> */}
+          &nbsp; Save / Publish
         </button>
-        <button
+        {/* <button
           style={{
             borderRadius: "7px",
             padding: "10px 44px",
@@ -306,7 +316,7 @@ export default function TextEditor() {
             alt="Share"
           />
           &nbsp; Share
-        </button>
+        </button> */}
       </div>
 
       <div dangerouslySetInnerHTML={{ __html: postContent }}></div>

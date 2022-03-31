@@ -44,7 +44,9 @@ export default function Login() {
           } else {
             authenticated = true;
             user_name = response.data.username;
+            let user_id = response.data.user_id;
             localStorage.setItem("user_name", user_name);
+            localStorage.setItem("user_id", user_id);
             history.push("/");
             window.location.reload();
           }

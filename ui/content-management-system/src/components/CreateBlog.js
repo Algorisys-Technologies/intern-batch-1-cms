@@ -37,11 +37,12 @@ export default function CreateBlog() {
     if (imageDataBlog == " ") {
       return alert("Select a blog Thumbnai");
     }
+    var user_id = localStorage.getItem("user_id");
 
     // post blog using axios
     axios
       .post("http://localhost:3001/create/blog", {
-        user_id: "ed4bd1ed-d329-492c-abd7-09ca1b143032", //Change with your database id
+        user_id: user_id,
         status: "true",
         blog_title: formData.blog_title,
         summary: formData.summary,

@@ -29,11 +29,16 @@ router.get("/getUser/:user_email", async (req, res) => {
   // console.log(process.env);
 });
 
-//GET USERNAME BY USER EMAIL
-// router.get("/getUser/:email", async (req, res) => {
-//   const user = await User.findOne({ where: { user_email: req.params.email } });
-//   return res.send(user.user_name);
-// });
+//GET USERNAME BY USER ID
+router.get("/getusername/:user_id", async (req, res) => {
+  const user = await User.findOne({
+    where: { user_id: req.params.user_id },
+  });
+  return res.send({
+    status: 200,
+    user_name: user.user_name,
+  });
+});
 
 //REGISTER-USER/SIGNUP
 router.post("/register", async (req, res) => {
@@ -113,6 +118,7 @@ router.post("/login", async (req, res) => {
     res.send({
       message: "Sign-in successfully!!",
       username: user.user_name,
+      user_id: user.user_id,
       status: 200,
     });
   }

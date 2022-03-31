@@ -15,6 +15,7 @@ import Post from "./components/Post";
 import ChangePassword from "./components/ForgotPassword2";
 import ForgotPassword from "./components/ForgotPassword1";
 import UpdatePostContent from "./components/updatePostContent";
+import MyPosts from "./components/MyPosts";
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route exact path="/createpost">
             <TextEditor />
+          </Route>
+          <Route exact path="/myposts">
+            <MyPosts />
           </Route>
           <Route exact path="/updatepost">
             <UpdatePostContent />
@@ -72,7 +76,7 @@ function App() {
           </Route>
         </Switch>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </Router>
   );
 }
