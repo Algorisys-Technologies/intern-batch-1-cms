@@ -1,20 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, useHistory } from "react-router-dom";
 export default function Blog() {
-  var dummyText = `Lorem Ipsum has been the industry's standard dummy text ever
-  since the 1500s, when an unknown printer took a galley of type
-  and scrambled it to make a type specimen book. It has survived
-  not only five centuries, but also the leap into electronic
-  typesetting, remaining essentially unchanged. It was
-  popularised in the 1960s with the release of Letraset sheets
-  containing Lorem Ipsum passages, and more recently with
-  desktop publishing software like Aldus PageMaker including
-  versions of Lorem Ipsum`;
   const [blogs, setBlogs] = useState([]);
   var user_id = localStorage.getItem("user_id");
 
+  const handleBlogDelete = (blogIdForDeletion) => {
+    axios
+      .delete(`http://localhost:3001/delblog/${blogIdForDeletion}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    window.location.reload();
+  };
   useEffect(() => {
     axios
       .get("http://localhost:3001/get/blog")
@@ -63,27 +66,41 @@ export default function Blog() {
                   alt=""
                 />
                 <div className="d-flex w-100 flex-column">
-                  <div className="d-flex justify-content-between flex-row">
+                  <div className="d-flex align-items-center justify-content-between flex-row">
                     <p
                       style={{ fontSize: "1.1rem" }}
                       className="p-2 text-muted ml-4"
                     >
                       {blog.blog_title}
                     </p>
-                    {/* <p
-                    style={{ fontSize: "1.1rem" }}
-                    className="p-2 text-muted ml-4"
-                  >
-                    12 March 2022
-                  </p> */}
+
                     <p
                       style={{
                         fontSize: "1.1rem",
                       }}
                       className="text-muted text-justify p-2 mr-4"
                     >
-                      {blog.created_by}
+                      Author : {blog.created_by}
                     </p>
+                    <Link
+                      style={{ textDecoration: "none", color: "unset" }}
+                      className="d-flex justify-content-center"
+                      to={"/blog"}
+                    >
+                      {" "}
+                      <button
+                        style={{
+                          fontSize: "1.1rem",
+                        }}
+                        className="text-justify mr-4 mt-1 btn btn-danger btn-sm"
+                        value={blog.blog_id}
+                        onClick={(e) => {
+                          handleBlogDelete(e.target.value);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </Link>
                   </div>
                   <div className="ml-4 p-2 text-justify">
                     {blog.summary.substring(0, 250) + "..."}
