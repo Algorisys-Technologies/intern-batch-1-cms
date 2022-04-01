@@ -91,7 +91,10 @@ const NavigationBar = () => {
                 <NavDropdown.Item>
                   <Link to="/createblog">New Blog</Link>
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action4">My blogs</NavDropdown.Item>
+                <Link to="/myblog">
+                  {" "}
+                  <NavDropdown.Item href="#action4">My blogs</NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
               </NavDropdown>
             )}

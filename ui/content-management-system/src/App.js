@@ -59,8 +59,8 @@ function App() {
           <Route exact path="/createblog">
             <CreateBlog />
           </Route>
-          <Route exact path="/postContent">
-            <Post />
+          <Route exact path="/myblog">
+            <Blog type="myblog" />
           </Route>
           <Route exact path="/login">
             <Login />
