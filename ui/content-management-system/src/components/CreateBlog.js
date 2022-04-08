@@ -38,6 +38,7 @@ export default function CreateBlog() {
       return alert("Select a blog Thumbnai");
     }
     var user_id = localStorage.getItem("user_id");
+    var user_name = localStorage.getItem("user_name");
 
     // post blog using axios
     axios
@@ -47,9 +48,9 @@ export default function CreateBlog() {
         blog_title: formData.blog_title,
         summary: formData.summary,
         blog_image: imageDataBlog,
-        created_at: "12:10:00+14:59",
+        created_at: new Date(),
         updated_at: null,
-        created_by: "Zaki",
+        created_by: user_name,
         updated_by: null,
       })
       .then(

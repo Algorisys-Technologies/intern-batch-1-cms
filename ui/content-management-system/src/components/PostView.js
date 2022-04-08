@@ -23,6 +23,13 @@ const AddPost = () => {
   }, []);
   return loading ? (
     <Loader />
+  ) : posts.length == 0 ? (
+    <div style={{ marginTop: "40px" }}>
+      <h1>Blog Doesn't have any post at the moment</h1>
+      <Link to="/createpost">
+        <Button style={{ marginTop: "40px" }}>Create New Post</Button>
+      </Link>
+    </div>
   ) : (
     <ul
       className="m-0 justify-content-center flex-wrap flex-row align-items-center d-flex"
@@ -42,7 +49,6 @@ const AddPost = () => {
                     height: "30rem",
                     margin: "30px 30px",
                     borderRadius: "40px",
-                    // boxShadow: "-3px -3px 15px 1px #c2c2c2",
                     boxShadow: "rgb(206 206 209) 5px 9px 26px -8px",
                     backgroundColor: "#fbfefd",
                     border: "none",
@@ -89,10 +95,6 @@ const AddPost = () => {
                         boxShadow: "rgb(206 206 209) 5px 9px 26px -8px",
                       }}
                     >
-                      {/* <img
-                        src="https://img.icons8.com/material-outlined/30/000000/filled-like.png"
-                        alt="Like"
-                      /> */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         x="0px"

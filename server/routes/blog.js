@@ -7,6 +7,10 @@ const Post = require("../models/post");
 router.get("/get/blog", async (req, res) => {
   const blog = await Blog.findAll();
   res.status(200).send(blog);
+  // res.send({
+  //   status: 200,
+  //   blog: blog,
+  // });
 });
 
 //Get Blog Name by ID

@@ -36,6 +36,7 @@ const NavigationBar = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem("user_name");
+    localStorage.removeItem("user_id");
     history.push("/");
     window.location.reload();
   };
@@ -99,15 +100,6 @@ const NavigationBar = () => {
               </NavDropdown>
             )}
           </Nav>
-          {/* <Form className="d-flex navbarLink">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form> */}
         </Navbar.Collapse>
 
         {!show && (

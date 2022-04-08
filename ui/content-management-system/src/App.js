@@ -16,7 +16,7 @@ import ChangePassword from "./components/ForgotPassword2";
 import ForgotPassword from "./components/ForgotPassword1";
 import UpdatePostContent from "./components/updatePostContent";
 import MyPosts from "./components/MyPosts";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <Router>
@@ -29,9 +29,9 @@ function App() {
           <Route exact path="/SignUp">
             <SignUp />
           </Route>
-          <Route exact path="/createpost">
+          <ProtectedRoute exact path="/createpost">
             <TextEditor />
-          </Route>
+          </ProtectedRoute>
           <Route exact path="/myposts">
             <MyPosts />
           </Route>

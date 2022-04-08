@@ -7,10 +7,10 @@ import axios from "axios";
 import Loader from "./Loader";
 import { ImagePicker } from "react-file-picker";
 import "../styles/TextEditor.css";
-// import tinymce from "@tinymce/tinymce-react";
 import tinymce from "react-tinymce";
-
+import { useHistory } from "react-router-dom";
 export default function TextEditor() {
+  const history = useHistory();
   const [category, setCategory] = useState("Category");
   const [tag, setTag] = useState([]);
   const [content, setContent] = useState("");
@@ -26,6 +26,8 @@ export default function TextEditor() {
   const [postContent, setPostContent] = useState(" ");
 
   var user_id = localStorage.getItem("user_id");
+  var user_name = localStorage.getItem("user_name");
+
   const postHandler = async (actionType) => {
     if (summary && imageData) {
       try {
@@ -37,10 +39,11 @@ export default function TextEditor() {
           status: actionType,
           post_content: editorRef.current.getContent(),
           created_at: "11:00:00+05:30",
-          created_by: "Zaki",
+          created_by: user_name,
           post_image: imageData,
           summary: summary,
         });
+        history.push("/blog");
       } catch (err) {
         console.log(err.message);
       }
@@ -88,7 +91,6 @@ export default function TextEditor() {
             Post summary
           </label>
           <Modal.Body>
-            {/* <input type="textarea" rows="4" cols="50" style={{ width: "100%" }} /> */}
             <textarea
               rows="6"
               cols="48"
@@ -125,7 +127,6 @@ export default function TextEditor() {
           <Modal.Footer>
             <Button
               variant="primary"
-              // onClick={handleCloseModal}
               style={{
                 position: "relative",
                 right: "100px",
@@ -145,7 +146,6 @@ export default function TextEditor() {
             </Button>
             <Button
               variant="primary"
-              // onClick={handleCloseModal}
               style={{
                 position: "relative",
                 right: "60px",
@@ -177,12 +177,6 @@ export default function TextEditor() {
           <div className="dropdown">
             <button className="editor-button">{category}</button>
             <div className="dropdown-content">
-              {/* <p>Personal</p>
-              <p>Business/corporate</p>
-              <p>Fashion</p>
-              <p>Travel</p>
-              <p>Food</p>
-              <p>Other</p> */}
               {[
                 "Personal",
                 "Business/corporate",
@@ -251,38 +245,12 @@ export default function TextEditor() {
                 "insertfile image media pageembed template link anchor codesample" +
                 "showcomments addcomment" +
                 "| help",
-
-              // content_style:
-              //   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             }}
           />
         </div>
 
-        <div>
-          <ReactTagInput
-            placeholder="Add tag..."
-            tags={tag}
-            onChange={(newTag) => setTag(newTag)}
-          />
-        </div>
         <br />
-        {/* <button
-          style={{
-            borderRadius: "7px",
-            padding: "10px 44px",
-            marginTop: "10px",
-            marginRight: "10px",
-            boxShadow:
-              " 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
-          }}
-          onClick={logy}
-        >
-          <img
-            src="https://img.icons8.com/external-soft-fill-juicy-fish/20/000000/external-draft-business-process-soft-fill-soft-fill-juicy-fish.png"
-            alt="Draft"
-          />
-          &nbsp; Draft
-        </button> */}
+
         <button
           style={{
             borderRadius: "7px",
@@ -294,29 +262,8 @@ export default function TextEditor() {
           }}
           onClick={logy}
         >
-          {/* <img
-            src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/25/000000/external-share-post-blogger-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png"
-            alt="Post"
-          /> */}
           &nbsp; Save / Publish
         </button>
-        {/* <button
-          style={{
-            borderRadius: "7px",
-            padding: "10px 44px",
-            marginTop: "10px",
-            marginRight: "10px",
-            marginBottom: "20px",
-            boxShadow:
-              " 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
-          }}
-        >
-          <img
-            src="https://img.icons8.com/material-outlined/24/000000/share.png"
-            alt="Share"
-          />
-          &nbsp; Share
-        </button> */}
       </div>
 
       <div dangerouslySetInnerHTML={{ __html: postContent }}></div>

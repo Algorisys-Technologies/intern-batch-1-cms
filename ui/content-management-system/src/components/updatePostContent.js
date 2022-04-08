@@ -29,7 +29,6 @@ export default function UpdatePostContent() {
       var Post = await axios.get(
         `http://localhost:3001/postContent/${post_id}`
       );
-      //console.log(Post);
       if (Post) {
         var { post_title, categories, blog_id, post_content } = Post.data[0];
         setTitle(post_title);
@@ -38,7 +37,6 @@ export default function UpdatePostContent() {
           setpostContent(editorRef.current.setContent(post_content));
         }, 100);
 
-        // setBlogId(blog_id);
         axios
           .get(`http://localhost:3001/get/blog/${blog_id}`, {
             blog_id: blog_id,
@@ -87,11 +85,7 @@ export default function UpdatePostContent() {
       updatePost();
     }, 2000);
 
-    console.log("Called");
-    // }, []);
-
-    // //Get Blog name values from database
-    // useEffect(() => {
+    // Get Blog name values from database
     axios
       .get("http://localhost:3001/get/blog")
       .then((Blog) => {
@@ -192,9 +186,6 @@ export default function UpdatePostContent() {
                 "insertfile image media pageembed template link anchor codesample" +
                 "showcomments addcomment" +
                 "| help",
-
-              // content_style:
-              //   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             }}
           />
         </div>
@@ -243,8 +234,6 @@ export default function UpdatePostContent() {
           &nbsp; Share
         </button>
       </div>
-
-      {/* <div dangerouslySetInnerHTML={{ __html: postContent }}></div> */}
     </>
   );
 }

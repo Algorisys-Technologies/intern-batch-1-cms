@@ -104,27 +104,6 @@ function HomePage() {
               </div>
             </div>
 
-            {/* <div className="mySlides">
-                <q>I love creating and writing blogs using CMS.</q>
-                <p className="author">- xyz</p>
-              </div>
-
-              <div className="mySlides">
-                <q>By using CMS my writing skills are much better.</q>
-                <p className="author">- lmn</p>
-              </div>
-
-              <div className="mySlides">
-                <q>It's fun.</q>
-                <p className="author">- pqr</p>
-              </div>
-
-              <a className="prev" onclick="plusSlides(-1)">
-                &lt;
-              </a>
-              <a className="next" onclick="plusSlides(1)">
-                &gt;
-              </a> */}
             <div className="footer__content">
               <h3 className="footer__title">Address</h3>
               <ul>
@@ -159,8 +138,6 @@ function HomePage() {
                 </div>
               </ul>
             </div>
-
-            {/* <img src="assets/img/home.png" alt="" className="home__img"> */}
           </div>
         </section>
       </main>

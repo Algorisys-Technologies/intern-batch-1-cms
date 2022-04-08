@@ -8,9 +8,7 @@ import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const history = useHistory();
-  // const Redirect = () => {
-  //   return <Redirect to="/" />;
-  // };
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

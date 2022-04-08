@@ -2,6 +2,8 @@ const express = require("express");
 const req = require("express/lib/request");
 const res = require("express/lib/response");
 const Post = require("../models/post");
+const User = require("../models/user");
+
 const router = express();
 //GET ALL POST
 router.get("/getPost", async (req, res) => {
@@ -21,6 +23,24 @@ router.get("/getPost", async (req, res) => {
 //   // }
 //   res.status(200).send(post);
 // });
+
+//GET POST AUTHOR NAME BY POST ID
+router.get("/postuser/:post_id", async (req, res) => {
+  const post = await Post.findOne({
+    where: {
+      post_id: req.params.post_id,
+    },
+  });
+  const author = await User.findOne({
+    where: {
+      user_id: post.user_id,
+    },
+  });
+  res.send({
+    status: 200,
+    author: author.user_name,
+  });
+});
 
 //GET POST BY POST ID
 router.get("/postContent/:post_id", async (req, res) => {

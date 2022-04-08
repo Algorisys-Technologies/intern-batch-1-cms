@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Avatar from "react-avatar";
 import "../styles/PostRender.css";
 import axios from "axios";
@@ -6,24 +6,34 @@ import { Link } from "react-router-dom";
 
 export default function PostRender() {
   const [content, setContent] = useState();
+  const [authorName, setAuthorName] = useState("");
   const userId = useRef(null);
 
   const queryParams = new URLSearchParams(window.location.search);
   const post_id = queryParams.get("post_id");
+
   //console.log(post_id);
   const postData = axios
     .get(`http://localhost:3001/postContent/${post_id}`)
     .then((data) => {
       var postDataObject = data.data[0];
-      //console.log(postDataObject);
       setContent(postDataObject.post_content);
-      // setuserId(postDataObject.user_id);
       userId.current.setContent(postDataObject.user_id);
-      // console.log(userId);
     })
     .catch((e) => {
       console.log(e.message);
     });
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/postuser/${post_id}`)
+      .then((response) => {
+        setAuthorName(response.data.author);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="post-wrapper">
@@ -31,7 +41,7 @@ export default function PostRender() {
         <p style={{ marginLeft: "5px" }}>
           <Avatar
             color={Avatar.getRandomColor("sitebase", ["red", "green", "blue"])}
-            name={localStorage.getItem("user_name")}
+            name={authorName}
             round={true}
             size={40}
           />
@@ -42,17 +52,9 @@ export default function PostRender() {
               color: "rgba(0,0,0,.5)",
             }}
           >
-            {localStorage.getItem("user_name")}
+            {authorName}
           </p>
         </p>
-        {/* <Link
-          to={{
-            pathname: "/updatepost",
-            search: `post_id=${post_id}`,
-          }}
-        >
-          <button className="post-edit">Edit</button>
-        </Link> */}
       </div>
       <div
         className="post-content"

@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  //const queryParams = new URLSearchParams(window.location.search);
   var user_id = localStorage.getItem("user_id");
 
   const handleDelete = (post_id) => {
@@ -115,10 +114,6 @@ const MyPosts = () => {
                         boxShadow: "rgb(206 206 209) 5px 9px 26px -8px",
                       }}
                     >
-                      {/* <img
-                        src="https://img.icons8.com/material-outlined/30/000000/filled-like.png"
-                        alt="Like"
-                      /> */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         x="0px"
