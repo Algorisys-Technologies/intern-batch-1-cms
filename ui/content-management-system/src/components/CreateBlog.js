@@ -55,7 +55,7 @@ export default function CreateBlog() {
       })
       .then(
         (response) => {
-          alert(response.data);
+          alert("Blog created successfully");
         },
         (error) => {
           alert(error.message);

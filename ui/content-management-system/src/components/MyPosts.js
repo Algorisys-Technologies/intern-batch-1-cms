@@ -10,7 +10,6 @@ const MyPosts = () => {
   var user_id = localStorage.getItem("user_id");
 
   const handleDelete = (post_id) => {
-    alert(post_id);
     axios
       .delete(`http://localhost:3001/delpost/${post_id}`, { post_id: post_id })
       .then((data) => {
@@ -49,7 +48,7 @@ const MyPosts = () => {
                 <Card
                   style={{
                     width: "19rem",
-                    height: "30rem",
+                    height: "26.5rem",
                     margin: "30px 30px",
                     borderRadius: "40px",
                     // boxShadow: "-3px -3px 15px 1px #c2c2c2",
@@ -85,7 +84,7 @@ const MyPosts = () => {
                       }}
                     >
                       <Button
-                        style={{ left: "2rem" }}
+                        style={{ left: "2rem", bottom: "1.3rem" }}
                         className="readMorebutton p-2"
                         variant="primary"
                       >
@@ -96,7 +95,7 @@ const MyPosts = () => {
                     <Button
                       variant="danger"
                       className="readMorebutton p-2"
-                      style={{ left: "11rem" }}
+                      style={{ left: "11rem", bottom: "1.3rem" }}
                       onClick={() => handleDelete(post.post_id)}
                     >
                       Delete Post
@@ -104,7 +103,7 @@ const MyPosts = () => {
 
                     <br />
                   </Card.Body>
-                  <ButtonGroup aria-label="Basic example">
+                  {/* <ButtonGroup aria-label="Basic example">
                     <Button
                       style={{
                         width: "120px",
@@ -227,7 +226,7 @@ const MyPosts = () => {
                         </g>
                       </svg>
                     </Button>
-                  </ButtonGroup>
+                  </ButtonGroup> */}
                 </Card>
               </li>
             </div>

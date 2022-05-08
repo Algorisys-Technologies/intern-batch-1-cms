@@ -96,7 +96,6 @@ const NavigationBar = () => {
                   {" "}
                   <NavDropdown.Item href="#action4">My blogs</NavDropdown.Item>
                 </Link>
-                <NavDropdown.Divider />
               </NavDropdown>
             )}
           </Nav>
